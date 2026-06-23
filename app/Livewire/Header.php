@@ -28,7 +28,7 @@ class Header extends Component
         $this->currentRoute = Route::currentRouteName() ?? 'home';
         $this->isDarkMode = session('dark_mode', false);
         $this->slides = Article::where('is_published', true)
-                              ->whereNotNull('image_path')
+                              ->whereNotNull('image')
                               ->latest('published_at')
                               ->take(3)
                               ->get();

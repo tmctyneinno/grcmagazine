@@ -33,9 +33,9 @@
                     ];
 
                     $moreLinks = [
-                        '/technology_ai' => 'Technology, AI & Reg Tech',
-                        '/reports_special' => 'Reports & Special Editions',
-                        '/research_whitepapers' => 'Research & Whitepapers',
+                        '#' => 'Technology, AI & Reg Tech',
+                        '#'' => 'Reports & Special Editions',
+                        '#' => 'Research & Whitepapers',
                     ];
 
                     $isMoreActive = collect(array_keys($moreLinks))

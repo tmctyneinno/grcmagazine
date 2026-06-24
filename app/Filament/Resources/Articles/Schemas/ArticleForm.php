@@ -36,14 +36,26 @@ class ArticleForm
                 RichEditor::make('content')
                     ->required()
                     ->columnSpanFull(),
+                // FileUpload::make('image')
+                //     ->label('Post Image')
+                //     ->image()
+                //     ->directory('posts')
+                //     ->visibility('public')
+                //     ->required()
+                //     ->imageResizeMode('cover')
+                //     ->imagePreviewHeight('250')
+                //     ->columnSpanFull(),
                 FileUpload::make('image')
                     ->label('Post Image')
                     ->image()
+                    ->disk('public')
                     ->directory('posts')
                     ->visibility('public')
                     ->required()
+                    ->maxSize(5120) // 5MB in kilobytes
                     ->imageResizeMode('cover')
                     ->imagePreviewHeight('250')
+                    ->acceptedFileTypes(['image/jpeg', 'image/png', 'image/webp', 'image/jpg'])
                     ->columnSpanFull(),
                 DatePicker::make('published_at')
                     ->required(),

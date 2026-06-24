@@ -20,7 +20,7 @@ class Article extends Model
     }
 
     protected $fillable = [
-        'title', 'slug', 'description', 'excerpt', 'content', 'image_path', 'published_at', 'comments_count', 'is_published'
+        'title', 'slug', 'description', 'excerpt', 'content', 'image', 'published_at', 'comments_count', 'is_published'
     ];
 
     protected $casts = [

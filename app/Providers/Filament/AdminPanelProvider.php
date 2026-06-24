@@ -31,7 +31,7 @@ class AdminPanelProvider extends PanelProvider
             ])
             ->brandLogo(asset('assets/img/logo.png'))
             ->brandLogoHeight('3.8rem')
-            ->brandName('LaToecross Artelier')
+            ->brandName('GRCFincrime Today')
             ->homeUrl(url('/'))
             
             // ✅ Only keep this valid line to hide top-right menu

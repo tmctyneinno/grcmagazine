@@ -17,7 +17,7 @@ new class extends Component
             ->get()
             ->map(function ($article) {
                 return [
-                    'image'       => $article->featured_image ? asset('storage/' . $article->featured_image) : asset('images/default-article.jpg'),
+                    'image'       => $article->image ? asset('storage/' . $article->image) : asset('images/default-article.jpg'),
                     'date'        => $article->published_at?->format('d F, Y') ?? 'Not published',
                     'title'       => $article->title,
                     'description' => $article->excerpt ?? '',
@@ -63,7 +63,7 @@ new class extends Component
         @else
             <div class="absolute inset-0 w-full h-full transition-opacity duration-1000 ease-in-out">
                 <img 
-                    src="{{ asset('storage/' .  $slides[$currentSlide]['image'] ) }}"
+                    src="{{ $slides[$currentSlide]['image'] }}" 
                     alt="{{ $slides[$currentSlide]['title'] }}" 
                     class="w-full h-full object-cover object-center"
                     loading="lazy"

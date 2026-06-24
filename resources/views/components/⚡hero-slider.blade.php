@@ -63,7 +63,7 @@ new class extends Component
         @else
             <div class="absolute inset-0 w-full h-full transition-opacity duration-1000 ease-in-out">
                 <img 
-                    src="{{ $slides[$currentSlide]['image'] }}" 
+                    src="{{ asset('storage/' .  $slides[$currentSlide]['image'] ) }}"
                     alt="{{ $slides[$currentSlide]['title'] }}" 
                     class="w-full h-full object-cover object-center"
                     loading="lazy"

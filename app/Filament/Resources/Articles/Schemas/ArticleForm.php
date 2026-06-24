@@ -22,7 +22,7 @@ class ArticleForm
                 // TextInput::make('slug')
                 //     ->required(),
                 Select::make('categories')
-                    ->relationship('categories', 'name') // uses the belongsToMany relation
+                    ->relationship('categories', 'name')
                     ->multiple()
                     ->preload()
                     ->searchable()
@@ -39,11 +39,16 @@ class ArticleForm
                 FileUpload::make('image')
                     ->label('Post Image')
                     ->image()
+                    ->disk('public') // ← Add this
                     ->directory('posts')
                     ->visibility('public')
                     ->required()
+                    ->maxSize(10240) // ← Add max size (10MB)
                     ->imageResizeMode('cover')
                     ->imagePreviewHeight('250')
+                    ->downloadable() // ← Add this to allow download
+                    ->openable() // ← Add this to view in new tab
+                    ->preserveFilenames() // ← Optional: keep original filename
                     ->columnSpanFull(),
                     
                 DatePicker::make('published_at')

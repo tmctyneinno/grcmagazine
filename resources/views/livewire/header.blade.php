@@ -34,7 +34,7 @@
 
                     $moreLinks = [
                         '#' => 'Technology, AI & Reg Tech',
-                        '#'' => 'Reports & Special Editions',
+                        '#' => 'Reports & Special Editions',
                         '#' => 'Research & Whitepapers',
                     ];
 

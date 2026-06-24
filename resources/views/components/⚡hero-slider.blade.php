@@ -71,24 +71,28 @@ new class extends Component
                 <div class="absolute inset-0 bg-gradient-to-b from-[#0f172a]/70 to-[#0f172a]/90"></div>
             </div>
 
-            <div class="absolute bottom-0 left-0 w-full px-6 md:px-12 lg:px-16 pb-12 md:pb-16 z-10 text-white">
+            <div class=" absolute bottom-0  left-0 w-full px-6 md:px-12 lg:px-16 pb-0 md:pb-5 z-10 text-white">
                 <div class="max-w-7xl mx-auto transition-all duration-1000 ease-in-out">
                     <p class="text-gray-300 text-sm md:text-base mb-2">
                         {{ $slides[$currentSlide]['date'] }}
                     </p>
-                    <h1 class="text-[clamp(1.8rem,4vw,4rem)] font-bold leading-tight mb-4">
-                        {{ $slides[$currentSlide]['title'] }}
+                    <a 
+                        href="{{ route('articles.show', $slides[$currentSlide]['slug']) }}" >
+                    <h1 class="text-[clamp(1.8rem,3vw,3rem)] font-bold leading-tight mb-4">
+                        <!-- {{ $slides[$currentSlide]['title'] }} -->
+                        {{ Str::limit($slides[$currentSlide]['title'],60) }}
                     </h1>
-                    <p class="text-gray-200 text-base md:text-lg max-w-4xl mb-6">
-                        {{ $slides[$currentSlide]['description'] }}
+                    </a>
+                    <p class="text-gray-200 text-base md:text-lg  mb-6">
+                        {{ Str::limit($slides[$currentSlide]['description'], 250) }}
                     </p>
                     {{-- ✅ FIXED LINK — matches your route --}}
-                    <a 
+                    <!-- <a 
                         href="{{ route('articles.show', $slides[$currentSlide]['slug']) }}" 
                         class="inline-block bg-white/20 hover:bg-white/30 text-white px-6 py-2 rounded-full transition backdrop-blur-sm"
                     >
                         Read Article
-                    </a>
+                    </a> -->
                 </div>
             </div>
 

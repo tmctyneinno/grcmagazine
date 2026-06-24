@@ -18,10 +18,7 @@ class Comment extends Model
         'status',
     ];
 
-    protected $casts = [
-        'created_at' => 'datetime',
-    ];
-
+    // Relationship: A comment belongs to one Article
     public function article()
     {
         return $this->belongsTo(Article::class, 'post_id');

@@ -32,4 +32,15 @@ class Article extends Model
     {
         return $this->belongsToMany(Category::class, 'article_category');
     }
+
+    public function comments()
+    {
+        return $this->hasMany(Comment::class, 'post_id')->where('status', 'approved')->latest();
+    }
+
+
+    public function author()
+    {
+        return $this->belongsTo(Author::class);
+    }
 }

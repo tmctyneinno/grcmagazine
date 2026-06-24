@@ -20,20 +20,16 @@ class EditArticle extends EditRecord
         ];
     }
 
-    // Remove mutateFormDataBeforeFill - not needed
-
     protected function mutateFormDataBeforeSave(array $data): array
     {
-        // Only delete old image if a NEW image was uploaded
-        if (isset($data['image']) && is_string($data['image'])) {
+        // Check if new image was uploaded
+        if (array_key_exists('image', $data)) {
+            $oldImage = $this->record->getRawOriginal('image');
             $newImage = $data['image'];
-            $oldImage = $this->record->getOriginal('image');
             
-            // Check if image actually changed
-            if ($oldImage && $newImage !== $oldImage) {
-                if (Storage::disk('public')->exists($oldImage)) {
-                    Storage::disk('public')->delete($oldImage);
-                }
+            // If there's an old image and it's different from new one, delete it
+            if ($oldImage && $newImage !== $oldImage && Storage::disk('public')->exists($oldImage)) {
+                Storage::disk('public')->delete($oldImage);
             }
         }
 

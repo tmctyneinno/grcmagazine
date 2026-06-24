@@ -10,6 +10,7 @@ use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\Toggle;
 use Filament\Schemas\Schema;
+use Livewire\Component;
 
 class ArticleForm
 {
@@ -19,8 +20,7 @@ class ArticleForm
             ->components([
                 TextInput::make('title')
                     ->required(),
-                // TextInput::make('slug')
-                //     ->required(),
+                    
                 Select::make('categories')
                     ->relationship('categories', 'name')
                     ->multiple()
@@ -30,33 +30,47 @@ class ArticleForm
                         TextInput::make('name')->required(),
                         TextInput::make('slug')->required(),
                     ]),
+                    
                 Textarea::make('excerpt')
                     ->default(null)
                     ->columnSpanFull(),
+                    
                 RichEditor::make('content')
                     ->required()
                     ->columnSpanFull(),
+                    
                 FileUpload::make('image')
                     ->label('Post Image')
                     ->image()
-                    ->disk('public') // ← Add this
+                    ->disk('public')
                     ->directory('posts')
                     ->visibility('public')
-                    ->required()
-                    ->maxSize(10240) // ← Add max size (10MB)
+                    ->required(fn (Component $livewire): bool => 
+                        $livewire instanceof \Filament\Resources\Pages\CreateRecord
+                    )
+                    ->maxSize(10240) // 10MB
+                    ->acceptedFileTypes(['image/jpeg', 'image/png', 'image/jpg', 'image/webp'])
                     ->imageResizeMode('cover')
+                    ->imageCropAspectRatio(null)
+                    ->imageResizeTargetWidth(null)
+                    ->imageResizeTargetHeight(null)
                     ->imagePreviewHeight('250')
-                    ->downloadable() // ← Add this to allow download
-                    ->openable() // ← Add this to view in new tab
-                    ->preserveFilenames() // ← Optional: keep original filename
+                    ->loadingIndicatorPosition('center')
+                    ->panelLayout('integrated')
+                    ->removeUploadedFileButtonPosition('right')
+                    ->uploadProgressIndicatorPosition('left')
+                    ->downloadable()
+                    ->openable()
                     ->columnSpanFull(),
                     
                 DatePicker::make('published_at')
                     ->required(),
+                    
                 TextInput::make('comments_count')
                     ->required()
                     ->numeric()
                     ->default(0),
+                    
                 Toggle::make('is_published')
                     ->required(),
             ]);

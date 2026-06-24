@@ -9,7 +9,7 @@
      @click.away="moreOpen = false">
 
     <nav class="fixed left-1/2 -translate-x-1/2 w-[90%] max-w-[1200px] z-50 py-2 rounded-[50px] shadow-lg border border-white transition-all duration-300"
-         :class="scrolled ? 'bg-white border-gray-200 top-0' : 'bg-transparent border-white top-6'">
+         :class="scrolled ? 'bg-white border-gray-200 top-0' : 'bg-transparent border-white top-4'">
 
         <div class="container mx-auto flex items-center justify-between px-4">
             <!-- Logo -->

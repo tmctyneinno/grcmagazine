@@ -5,5 +5,6 @@
 @section('content')
       
     <livewire:post-header />
-    <livewire:leave-comment />
+    {{-- ✅ Pass the article ID here --}}
+    <livewire:leave-comment :postId="$article->id" />
 @endsection

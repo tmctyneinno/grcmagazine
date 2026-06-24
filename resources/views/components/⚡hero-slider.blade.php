@@ -1,7 +1,6 @@
 <?php
 
 use Livewire\Component;
-// ✅ EXPLICIT IMPORT — THIS IS WHAT FIXES THE ERROR
 use App\Models\Article;
 
 new class extends Component
@@ -11,18 +10,18 @@ new class extends Component
 
     public function mount()
     {
-        // ✅ Retrieve ONLY PUBLISHED articles, newest first
-        $this->slides = Article::where('is_published', true)
+        $this->slides = Article::whereNotNull('published_at')
+            ->where('published_at', '<=', now())
             ->orderBy('published_at', 'desc')
-            ->take(5) // Show max 5 slides
+            ->take(5)
             ->get()
             ->map(function ($article) {
                 return [
-                    'image' => asset('storage/' . $article->image), // Full URL to image
-                    'date' => $article->published_at?->format('d F, Y') ?? 'Draft', // Format date
-                    'title' => $article->title,
-                    'description' => $article->excerpt ?? $article->description ?? '', // Use excerpt first
-                    'slug' => $article->slug, // For linking to full article
+                    'image'       => $article->featured_image ? asset('storage/' . $article->featured_image) : asset('images/default-article.jpg'),
+                    'date'        => $article->published_at?->format('d F, Y') ?? 'Not published',
+                    'title'       => $article->title,
+                    'description' => $article->excerpt ?? '',
+                    'slug'        => $article->slug,
                 ];
             })
             ->toArray();
@@ -41,7 +40,6 @@ new class extends Component
             $this->currentSlide = ($this->currentSlide - 1 + count($this->slides)) % count($this->slides);
         }
     }
-
 };
 ?>
 
@@ -53,31 +51,28 @@ new class extends Component
                 if (this.current !== undefined) {
                     $wire.nextSlide();
                 }
-            }, 5000); // Auto-change every 5 seconds
+            }, 5000);
         }
     }"
 >
     <section class="relative w-full h-[85vh] md:h-[95vh] overflow-hidden">
-        {{-- If no articles published --}}
         @if(empty($slides))
             <div class="w-full h-full flex items-center justify-center bg-gray-900 text-white">
                 <p>No published articles available.</p>
             </div>
         @else
-            <!-- Background Image with Smooth Transition -->
             <div class="absolute inset-0 w-full h-full transition-opacity duration-1000 ease-in-out">
                 <img 
                     src="{{ $slides[$currentSlide]['image'] }}" 
                     alt="{{ $slides[$currentSlide]['title'] }}" 
                     class="w-full h-full object-cover object-center"
+                    loading="lazy"
                 >
-                <!-- Dark overlay matching your design -->
                 <div class="absolute inset-0 bg-gradient-to-b from-[#0f172a]/70 to-[#0f172a]/90"></div>
             </div>
 
-            <!-- Content with Fade/Up Animation -->
             <div class="absolute bottom-0 left-0 w-full px-6 md:px-12 lg:px-16 pb-12 md:pb-16 z-10 text-white">
-                <div class="max-w-7xl mx-auto transition-all duration-1000 ease-in-out transform translate-y-0 opacity-100">
+                <div class="max-w-7xl mx-auto transition-all duration-1000 ease-in-out">
                     <p class="text-gray-300 text-sm md:text-base mb-2">
                         {{ $slides[$currentSlide]['date'] }}
                     </p>
@@ -87,17 +82,16 @@ new class extends Component
                     <p class="text-gray-200 text-base md:text-lg max-w-4xl mb-6">
                         {{ $slides[$currentSlide]['description'] }}
                     </p>
-                    {{-- Optional: Read More Button --}}
-                    <a href="{{ url('/post/post-details') }}" class="inline-block bg-white/20 hover:bg-white/30 text-white px-6 py-2 rounded-full transition backdrop-blur-sm">
+                    {{-- ✅ FIXED LINK — matches your route --}}
+                    <a 
+                        href="{{ route('articles.show', $slides[$currentSlide]['slug']) }}" 
+                        class="inline-block bg-white/20 hover:bg-white/30 text-white px-6 py-2 rounded-full transition backdrop-blur-sm"
+                    >
                         Read Article
                     </a>
-                    <!-- <a href="/article-details/{{ $slides[$currentSlide]['slug'] }}" class="inline-block bg-white/20 hover:bg-white/30 text-white px-6 py-2 rounded-full transition backdrop-blur-sm">
-                        Read Article
-                    </a> -->
                 </div>
             </div>
 
-            <!-- Navigation Arrows -->
             <button 
                 wire:click="prevSlide" 
                 class="absolute left-4 top-1/2 -translate-y-1/2 bg-white/10 hover:bg-white/20 text-white p-3 rounded-full transition z-20"

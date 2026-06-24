@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Article;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -41,9 +42,13 @@ class HomeController extends Controller
         return view('frontend.events');
     }
 
-    public function postDetails()
+    public function showDetails($slug)
     {
-        return view('frontend.postDetails');
-    }
+        // ✅ Make sure we find the article
+        $article = Article::where('slug', $slug)
+            ->whereNotNull('published_at')
+            ->firstOrFail();
 
+        return view('frontend.postDetails', compact('article'));
+    }
 }

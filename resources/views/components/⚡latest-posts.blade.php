@@ -30,7 +30,7 @@ new class extends Component
         $this->posts = $query->get()->map(function ($article) {
             return [
                 'slug'    => $article->slug,
-                'image'   => $article->featured_image ? asset('storage/' . $article->featured_image) : asset('images/default-post.jpg'),
+                'image'   => $article->image ? asset('storage/' . $article->image) : asset('images/default-post.jpg'),
                 'title'   => $article->title,
                 'excerpt' => Str::limit(strip_tags($article->excerpt ?? ''), 80),
                 'date'    => $article->published_at?->format('M d, Y') ?? 'Draft',

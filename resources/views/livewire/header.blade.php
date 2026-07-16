@@ -1,28 +1,51 @@
-<div class="px-[50px]"
-     x-data="{
-         scrolled: false,
-         mobileOpen: false,
-         moreOpen: false,
-         mobileMoreOpen: false
-     }"
-     @scroll.window="scrolled = window.scrollY > 50"
-     @click.away="moreOpen = false">
-
-    <nav class="fixed left-1/2 -translate-x-1/2 w-[90%] max-w-[1200px] z-50 py-2 rounded-[50px] shadow-lg border border-white transition-all duration-300"
-         :class="scrolled ? 'bg-white border-gray-200 top-0' : 'bg-transparent border-white top-4'">
-
-        <div class="container mx-auto flex items-center justify-between px-4">
-            <!-- Logo -->
-            <div class="flex items-center bg-white rounded-[50px] px-4 py-2">
-                <a href="{{ url('/') }}" wire:navigate>
-                    <img src="/assets/img/logo.png" alt="GRC & Financial Crime" class="h-10">
-                </a>
+{{-- ✅ SINGLE ROOT ELEMENT for Livewire --}}
+<div class="w-full">
+    {{-- 🔝 INTELLIGENCE BRIEF TICKER BAR --}}
+    <div class="w-full bg-[#0b1120] border-b-2 border-[#2a3143] overflow-hidden">
+        <div class="flex items-center py-4 px-6 md:px-10">
+            {{-- Left Badge --}}
+            <div class="flex-shrink-0 bg-red-700 text-white font-bold text-base md:text-lg px-6 py-2 rounded mr-8 md:mr-12 whitespace-nowrap z-10 tracking-wide">
+                INTELLIGENCE BRIEF
             </div>
 
-            <!-- Desktop Menu -->
-            <div class="hidden lg:flex items-center space-x-8">
+            {{-- Auto-Scrolling Ticker --}}
+            <div class="flex-1 overflow-hidden">
+                <div class="flex items-center gap-20 text-amber-200 text-base md:text-lg font-semibold whitespace-nowrap animate-marquee">
+                    <span>firm for AML Failings</span>
+                    <span>FATF grey-lists three new jurisdictions ahead of plenary session</span>
+                    <span>New EU AMLD6 implementation deadline configuration</span>
+                    <span>FATF grey-lists three new jurisdictions ahead of plenary session</span>
+                    <span>firm for AML Failings</span>
+                    <span>FATF grey-lists three new jurisdictions ahead of plenary session</span>
+                    <span>New EU AMLD6 implementation deadline configuration</span>
+                    <span>FATF grey-lists three new jurisdictions ahead of plenary session</span>
+                </div>
+            </div>
+
+            {{-- Right Issue Info --}}
+            <div class="flex-shrink-0 ml-8 pl-8 border-l-2 border-amber-300/30 text-amber-200 text-base md:text-lg font-semibold whitespace-nowrap tracking-wide">
+                vol VII . ISSUE 24 . 24 JUN 2026
+            </div>
+        </div>
+    </div>
+
+    {{-- 🧭 NEW MAIN NAVBAR (Matches your image exactly) --}}
+    <header class="w-full bg-[#0f1424] border-b-4 border-[#c99b3a]">
+        <div class="max-w-7xl mx-auto px-4 md:px-8 py-6 flex flex-col lg:flex-row items-center justify-between gap-6">
+            {{-- Brand Logo & Tagline - Now in ONE LINE --}}
+            <div class="text-center lg:text-left">
+                <h2 class="text-2xl md:text-wxl font-serif font-bold text-white">
+                    GRC & Financial Crime <span class="text-[#c99b3a]">Today</span>
+                </h2>
+                <p class="text-[10px] text-gray-400 uppercase tracking-widest mt-1.5 font-medium">
+                    AN IGRCFP PUBLICATION . THE MORGANS CONSORTIUM
+                </p>
+            </div>
+
+            {{-- Desktop Navigation --}}
+            <nav class="hidden lg:flex items-center gap-4 md:gap-6 text-sm md:text-base font-medium tracking-wide">
                 @php
-                    $links = [
+                    $navLinks = [
                         '/' => 'Home',
                         '/about' => 'About',
                         '/news' => 'News',
@@ -31,104 +54,68 @@
                         '/events' => 'Event',
                         '/contact' => 'Contact',
                     ];
-
-                    $moreLinks = [
-                        '#' => 'Technology, AI & Reg Tech',
-                        '#' => 'Reports & Special Editions',
-                        '#' => 'Research & Whitepapers',
-                    ];
-
-                    $isMoreActive = collect(array_keys($moreLinks))
-                        ->contains(fn ($path) => request()->is(trim($path, '/') ?: '/'));
                 @endphp
 
-                @foreach ($links as $path => $label)
+                @foreach ($navLinks as $path => $label)
                     @php
                         $isActive = request()->is(trim($path, '/') ?: '/');
                     @endphp
                     <a href="{{ url($path) }}"
                        wire:navigate
                        @if($isActive) aria-current="page" @endif
-                       class="transition hover:text-blue-400 relative"
-                       :class="!scrolled ? 'text-white' : 'text-black'"
                        @class([
-                           'text-blue-500 font-medium after:content-[\'\'] after:absolute after:-bottom-1 after:left-0 after:w-full after:h-[2px] after:bg-blue-500' => $isActive,
+                           'transition-all duration-200 relative pb-0.5',
+                           'text-[#c99b3a] after:absolute after:bottom-0 after:left-0 after:w-full after:h-0.5 after:bg-[#c99b3a]' => $isActive,
+                           'text-gray-300 hover:text-white' => !$isActive,
                        ])
                     >
                         {{ $label }}
                     </a>
                 @endforeach
 
-                <!-- More Dropdown -->
-                <div class="relative">
-                    <button
-                        @click="moreOpen = !moreOpen"
-                        class="flex items-center gap-1 transition hover:text-blue-400 relative"
-                        :class="!scrolled ? 'text-white' : 'text-black'"
-                        @class([
-                            'text-blue-500 font-medium after:content-[\'\'] after:absolute after:-bottom-1 after:left-0 after:w-full after:h-[2px] after:bg-blue-500' => $isMoreActive,
-                        ])
-                        :aria-expanded="moreOpen"
-                        aria-haspopup="true"
-                    >
-                        More
-                        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 transition-transform duration-200" :class="moreOpen ? 'rotate-180' : ''" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
-                        </svg>
-                    </button>
+                {{-- Search Icon --}}
+                <button class="text-gray-300 hover:text-white transition-colors p-1.5" aria-label="Search">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-5 h-5">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607Z" />
+                    </svg>
+                </button>
 
-                    <div x-show="moreOpen"
-                         x-transition
-                         x-cloak
-                         class="absolute top-full left-1/2 -translate-x-1/2 mt-3 w-56 bg-white rounded-2xl shadow-lg border border-gray-100 overflow-hidden py-2"
-                    >
-                        @foreach ($moreLinks as $path => $label)
-                            @php
-                                $isActive = request()->is(trim($path, '/') ?: '/');
-                            @endphp
-                            <a href="{{ url($path) }}"
-                               wire:navigate
-                               @click="moreOpen = false"
-                               @if($isActive) aria-current="page" @endif
-                               @class([
-                                   'block px-5 py-2.5 text-sm text-gray-700 hover:bg-gray-50 hover:text-blue-500 transition',
-                                   'text-blue-500 font-medium bg-gray-50' => $isActive,
-                               ])
-                            >
-                                {{ $label }}
-                            </a>
-                        @endforeach
-                    </div> 
-                </div>
-            </div>
+                {{-- Subscribe Button --}}
+                <a href="{{ url('/subscribe') }}"
+                   wire:navigate
+                   class="bg-[#c99b3a] hover:bg-[#b3882e] text-black font-bold text-sm px-6 py-2 rounded-lg transition-colors tracking-wide"
+                >
+                    SUBSCRIBE
+                </a>
+            </nav>
 
-            <!-- Mobile Menu Button -->
-            <div class="lg:hidden">
+            {{-- Mobile Menu Button --}}
+            <div class="lg:hidden flex items-center justify-between w-full">
+                <div></div>
                 <button
                     @click="mobileOpen = !mobileOpen"
-                    class="text-2xl transition-colors duration-300"
-                    :class="scrolled ? 'text-black' : 'text-white'"
+                    class="text-white text-3xl"
                     :aria-expanded="mobileOpen"
                     aria-label="Toggle navigation menu"
                 >
-                    <svg x-show="!mobileOpen" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                    <svg x-show="!mobileOpen" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-8 h-8">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
                     </svg>
-                    <svg x-show="mobileOpen" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                    <svg x-show="mobileOpen" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-8 h-8">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
                     </svg>
                 </button>
             </div>
         </div>
 
-        <!-- Mobile Menu Panel -->
+        {{-- Mobile Navigation Panel --}}
         <div x-show="mobileOpen"
              x-transition
              x-cloak
-             class="lg:hidden mt-2 mx-2 rounded-[24px] bg-white shadow-lg overflow-hidden"
+             class="lg:hidden bg-[#0f1424] border-t border-gray-700"
         >
-            <div class="flex flex-col py-2">
-                @foreach ($links as $path => $label)
+            <div class="max-w-7xl mx-auto px-4 md:px-8 py-4 flex flex-col gap-4">
+                @foreach ($navLinks as $path => $label)
                     @php
                         $isActive = request()->is(trim($path, '/') ?: '/');
                     @endphp
@@ -137,45 +124,51 @@
                        @click="mobileOpen = false"
                        @if($isActive) aria-current="page" @endif
                        @class([
-                           'px-6 py-3 text-black hover:bg-gray-50 transition',
-                           'text-blue-500 font-medium' => $isActive,
+                           'py-2 px-4 rounded-lg transition-colors text-sm font-medium',
+                           'text-[#c99b3a] bg-white/5' => $isActive,
+                           'text-gray-300 hover:text-white hover:bg-white/5' => !$isActive,
                        ])
                     >
                         {{ $label }}
                     </a>
                 @endforeach
 
-                <!-- More Accordion (mobile) -->
-                <button
-                    @click="mobileMoreOpen = !mobileMoreOpen"
-                    class="flex items-center justify-between px-6 py-3 text-black hover:bg-gray-50 transition"
-                    :aria-expanded="mobileMoreOpen"
-                >
-                    More
-                    <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 transition-transform duration-200" :class="mobileMoreOpen ? 'rotate-180' : ''" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
-                    </svg>
-                </button>
-
-                <div x-show="mobileMoreOpen" x-transition x-cloak class="bg-gray-50">
-                    @foreach ($moreLinks as $path => $label)
-                        @php
-                            $isActive = request()->is(trim($path, '/') ?: '/');
-                        @endphp
-                        <a href="{{ url($path) }}"
-                           wire:navigate
-                           @click="mobileOpen = false; mobileMoreOpen = false"
-                           @if($isActive) aria-current="page" @endif
-                           @class([
-                               'block pl-10 pr-6 py-2.5 text-sm text-gray-700 hover:bg-gray-100 transition',
-                               'text-blue-500 font-medium' => $isActive,
-                           ])
-                        >
-                            {{ $label }}
-                        </a>
-                    @endforeach
+                <div class="flex flex-col gap-3 pt-3 border-t border-gray-700">
+                    <button class="flex items-center gap-3 text-gray-300 hover:text-white px-4 py-2 text-sm font-medium transition-colors" aria-label="Search">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-5 h-5">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607Z" />
+                        </svg>
+                        Search
+                    </button>
+                    <a href="{{ url('/subscribe') }}"
+                       wire:navigate
+                       @click="mobileOpen = false"
+                       class="bg-[#c99b3a] hover:bg-[#b3882e] text-black font-bold text-sm px-6 py-2 rounded-lg text-center transition-colors tracking-wide"
+                    >
+                        SUBSCRIBE
+                    </a>
                 </div>
             </div>
         </div>
-    </nav>
+    </header>
 </div>
+
+<style type="text/tailwindcss">
+@layer utilities {
+    .backdrop-blur-md {
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+    }
+}
+/* Infinite Smooth Ticker Scroll */
+@keyframes marquee {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+}
+.animate-marquee {
+    animation: marquee 28s linear infinite;
+}
+.animate-marquee:hover {
+    animation-play-state: paused;
+}
+</style>

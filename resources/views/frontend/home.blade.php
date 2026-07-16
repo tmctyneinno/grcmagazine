@@ -8,4 +8,4 @@
     <livewire:recommended-posts />
     <livewire:most-read />
     <livewire:reports-special-editions />
-@endsection  
+@endsection   

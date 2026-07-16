@@ -1,265 +1,216 @@
-<div>
-    <header class="header-area style-2" 
-            x-data="{ 
-                mobileMenuOpen: @entangle('isMobileMenuOpen'),
-                darkMode: @entangle('isDarkMode'),
-                activeDropdown: @entangle('activeDropdown')
-            }"
-            :class="{ 'dark-mode': darkMode }">
-        <div class="container d-flex flex-nowrap align-items-center justify-content-between">
-            <!-- Logo -->
-            <div class="header-logo">
-                <a href="{{ route('home') }}" wire:navigate>
-                    <img alt="image" class="img-fluid light" src="{{ asset('assets/img/logo.png') }}">
-                    <img alt="image" class="img-fluid dark" src="{{ asset('assets/img/logo.png') }}">
-                </a>
-            </div> 
+{{-- ✅ SINGLE ROOT ELEMENT for Livewire --}}
+<div class="w-full">
+    {{-- 🔝 INTELLIGENCE BRIEF TICKER BAR --}}
+    <div class="w-full bg-[#0b1120] border-b border-[#2a3143] overflow-hidden">
+        <div class="flex items-center py-3 px-4 md:px-6">
+            {{-- Left Badge --}}
+            <div class="flex-shrink-0 bg-red-700 text-white font-bold px-5 py-1.5 rounded mr-6 md:mr-10 whitespace-nowrap z-10">
+                INTELLIGENCE BRIEF
+            </div>
 
-            <!-- Main Menu -->
-            <div class="main-menu" :class="{ 'active': mobileMenuOpen }">
-                <!-- Mobile Logo -->
-                <div class="mobile-logo-area d-lg-none d-flex justify-content-center">
-                    <a href="{{ route('home') }}" class="mobile-logo-wrap" wire:navigate>
-                        <img alt="image" class="img-fluid light" src="{{ asset('assets/img/logo.png') }}">
-                        <img alt="image" class="img-fluid dark" src="{{ asset('assets/img/logo.png') }}">
+            {{-- Auto-Scrolling Ticker --}}
+            <div class="flex-1 overflow-hidden">
+                <div class="flex items-center gap-16 text-amber-200 text-sm md:text-base font-medium whitespace-nowrap animate-marquee">
+                    {{-- First set --}}
+                    <span>firm for AML Failings</span>
+                    <span>FATF grey-lists three new jurisdictions ahead of plenary session</span>
+                    <span>New EU AMLD6 implementation deadline configuration</span>
+                    <span>FATF grey-lists three new jurisdictions ahead of plenary session</span>
+                    {{-- Duplicate for seamless loop --}}
+                    <span>firm for AML Failings</span>
+                    <span>FATF grey-lists three new jurisdictions ahead of plenary session</span>
+                    <span>New EU AMLD6 implementation deadline configuration</span>
+                    <span>FATF grey-lists three new jurisdictions ahead of plenary session</span>
+                </div>
+            </div>
+
+            {{-- Right Issue Info --}}
+            <div class="flex-shrink-0 ml-6 pl-6 border-l border-amber-300/30 text-amber-200 text-sm md:text-base font-medium whitespace-nowrap">
+                vol VII . ISSUE 24 . 24 JUN 2026
+            </div>
+        </div>
+    </div>
+
+    {{-- 🧭 MAIN NAVBAR --}}
+    <div class="px-[50px]"
+         x-data="{
+             scrolled: false,
+             mobileOpen: false,
+             moreOpen: false,
+             mobileMoreOpen: false
+         }"
+         @scroll.window="scrolled = window.scrollY > 50"
+         @click.away="moreOpen = false">
+
+        <nav class="fixed left-1/2 -translate-x-1/2 w-[90%] max-w-[1200px] z-50 py-2 rounded-[50px] shadow-lg border border-white transition-all duration-300"
+             :class="scrolled ? 'bg-white border-gray-200 top-0' : 'bg-transparent border-white top-4'">
+     
+            <div class="container mx-auto flex items-center justify-between px-4">
+                <!-- Logo -->
+                <div class="flex items-center bg-white rounded-[50px] px-4 py-2">
+                    <a href="{{ url('/') }}" wire:navigate>
+                        <img src="/assets/img/logo.png" alt="GRC & Financial Crime" class="h-10">
                     </a>
                 </div>
 
-                <ul class="menu-list">
-                    @foreach($menuItems as $key => $item)
-                        @php
-                            $isActive = $currentRoute === $item['route'];
-                            $hasActiveChild = false;
-                            foreach($item['children'] as $child) {
-                                if ($currentRoute === $child['route']) {
-                                    $hasActiveChild = true;
-                                    break;
-                                }
-                            }
-                            $isActiveOrChild = $isActive || $hasActiveChild;
-                            $hasChildren = count($item['children']) > 0;
-                        @endphp
-                        
-                        <li class="{{ $isActiveOrChild ? 'active' : '' }}
-                                   {{ $hasChildren ? 'menu-item-has-children' : '' }}">
-                            
-                            @if($hasChildren)
-                                <a href="#" class="drop-down" 
-                                   @click.prevent="activeDropdown = activeDropdown === '{{ $key }}' ? null : '{{ $key }}'"
-                                   x-bind:class="{ 'active': activeDropdown === '{{ $key }}' }">
-                                    {{ $item['label'] }}
-                                </a>
-                                <i class="bi bi-plus dropdown-icon" 
-                                   @click="activeDropdown = activeDropdown === '{{ $key }}' ? null : '{{ $key }}'"
-                                   x-bind:class="{ 'rotated': activeDropdown === '{{ $key }}' }"></i>
-                                
-                                <ul class="sub-menu" 
-                                    x-show="activeDropdown === '{{ $key }}'"
-                                    x-transition:enter="transition ease-out duration-200"
-                                    x-transition:enter-start="opacity-0 -translate-y-2"
-                                    x-transition:enter-end="opacity-100 translate-y-0">
-                                    @foreach($item['children'] as $child)
-                                        @php
-                                            $isChildActive = $currentRoute === $child['route'];
-                                        @endphp
-                                        <li class="{{ $isChildActive ? 'active' : '' }}">
-                                            <a href="{{ route($child['route']) }}" wire:navigate>
-                                                {{ $child['label'] }}
-                                            </a>
-                                        </li>
-                                    @endforeach
-                                </ul>
-                            @else
-                                <a href="{{ route($item['route']) }}" wire:navigate
-                                   class="{{ $isActive ? 'active' : '' }}">
-                                    {{ $item['label'] }}
-                                </a>
-                            @endif
-                        </li>
-                    @endforeach
-                </ul>
-            </div>
+                <!-- Desktop Menu -->
+                <div class="hidden lg:flex items-center space-x-8">
+                    @php
+                        $links = [
+                            '/' => 'Home',
+                            '/about' => 'About',
+                            '/news' => 'News',
+                            '/fincrime-aml' => 'FinCrime & AML',
+                            '/risk-esg' => 'Risk & ESG',
+                            '/events' => 'Event',
+                            '/contact' => 'Contact',
+                        ];
 
-            <!-- Navigation Right -->
-            <div class="nav-right">
-                <!-- Dark/Light Switch -->
-                <div class="dark-light-switch d-lg-none d-block" 
-                     @click="darkMode = !darkMode; $wire.toggleDarkMode()">
-                    <i class="bi bi-brightness-low-fill" 
-                       x-bind:class="{ 'bi-brightness-low-fill': !darkMode, 'bi-moon-fill': darkMode }"></i>
+                        $moreLinks = [
+                            '#' => 'Technology, AI & Reg Tech',
+                            '#' => 'Reports & Special Editions',
+                            '#' => 'Research & Whitepapers',
+                        ];
+
+                        $isMoreActive = collect(array_keys($moreLinks))
+                            ->contains(fn ($path) => request()->is(trim($path, '/') ?: '/'));
+                    @endphp
+
+                    @foreach ($links as $path => $label)
+                        @php
+                            $isActive = request()->is(trim($path, '/') ?: '/');
+                        @endphp
+                        <a href="{{ url($path) }}"
+                           wire:navigate
+                           @if($isActive) aria-current="page" @endif
+                           class="transition hover:text-blue-400 relative"
+                           :class="!scrolled ? 'text-white' : 'text-black'"
+                           @class([
+                               'text-blue-500 font-medium after:content-[\'\'] after:absolute after:-bottom-1 after:left-0 after:w-full after:h-[2px] after:bg-blue-500' => $isActive,
+                           ])
+                        >
+                            {{ $label }}
+                        </a>
+                    @endforeach
+
+                    <!-- More Dropdown -->
+                    <div class="relative">
+                        <button
+                            @click="moreOpen = !moreOpen"
+                            class="flex items-center gap-1 transition hover:text-blue-400 relative"
+                            :class="!scrolled ? 'text-white' : 'text-black'"
+                            @class([
+                                'text-blue-500 font-medium after:content-[\'\'] after:absolute after:-bottom-1 after:left-0 after:w-full after:h-[2px] after:bg-blue-500' => $isMoreActive,
+                            ])
+                            :aria-expanded="moreOpen"
+                            aria-haspopup="true"
+                        >
+                            More
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 transition-transform duration-200" :class="moreOpen ? 'rotate-180' : ''" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
+                            </svg>
+                        </button>
+
+                        <div x-show="moreOpen"
+                             x-transition
+                             x-cloak
+                             class="absolute top-full left-1/2 -translate-x-1/2 mt-3 w-56 bg-white rounded-2xl shadow-lg border border-gray-100 overflow-hidden py-2"
+                        >
+                            @foreach ($moreLinks as $path => $label)
+                                @php
+                                    $isActive = request()->is(trim($path, '/') ?: '/');
+                                @endphp
+                                <a href="{{ url($path) }}"
+                                   wire:navigate
+                                   @click="moreOpen = false"
+                                   @if($isActive) aria-current="page" @endif
+                                   @class([
+                                       'block px-5 py-2.5 text-sm text-gray-700 hover:bg-gray-50 hover:text-blue-500 transition',
+                                       'text-blue-500 font-medium bg-gray-50' => $isActive,
+                                   ])
+                                >
+                                    {{ $label }}
+                                </a>
+                            @endforeach
+                        </div> 
+                    </div>
                 </div>
 
                 <!-- Mobile Menu Button -->
-                <div class="sidebar-button mobile-menu-btn" @click="mobileMenuOpen = !mobileMenuOpen">
-                    <span></span>
+                <div class="lg:hidden">
+                    <button
+                        @click="mobileOpen = !mobileOpen"
+                        class="text-2xl transition-colors duration-300"
+                        :class="scrolled ? 'text-black' : 'text-white'"
+                        :aria-expanded="mobileOpen"
+                        aria-label="Toggle navigation menu"
+                    >
+                        <svg x-show="!mobileOpen" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+                        </svg>
+                        <svg x-show="mobileOpen" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                        </svg>
+                    </button>
                 </div>
             </div>
-        </div>
 
-        <!-- Loading Indicator for Navigation -->
-        <div wire:loading wire:target="navigate" 
-             class="fixed top-0 left-0 right-0 h-1 bg-primary-500 z-50">
-            <div class="h-full bg-gradient-to-r from-primary-400 to-primary-600 animate-progress"></div>
-        </div>
-    </header>
+            <!-- Mobile Menu Panel -->
+            <div x-show="mobileOpen"
+                 x-transition
+                 x-cloak
+                 class="lg:hidden mt-2 mx-2 rounded-[24px] bg-white shadow-lg overflow-hidden"
+            >
+                <div class="flex flex-col py-2">
+                    @foreach ($links as $path => $label)
+                        @php
+                            $isActive = request()->is(trim($path, '/') ?: '/');
+                        @endphp
+                        <a href="{{ url($path) }}"
+                           wire:navigate
+                           @click="mobileOpen = false"
+                           @if($isActive) aria-current="page" @endif
+                           @class([
+                               'px-6 py-3 text-black hover:bg-gray-50 transition',
+                               'text-blue-500 font-medium' => $isActive,
+                           ])
+                        >
+                            {{ $label }}
+                        </a>
+                    @endforeach
 
-    @push('styles')
-    <style>
-        .sub-menu {
-            display: none;
-        }
-        
-        [x-cloak] {
-            display: none !important;
-        }
-        
-        .dropdown-icon.rotated {
-            transform: rotate(180deg);
-            transition: transform 0.3s ease;
-        }
-        
-        .dropdown-icon {
-            transition: transform 0.3s ease;
-            cursor: pointer;
-        }
-        
-        .animate-progress {
-            animation: progress 1.5s ease-in-out infinite;
-        }
-        
-        @keyframes progress {
-            0% { width: 0%; }
-            50% { width: 70%; }
-            100% { width: 100%; }
-        }
-        
-        /* Dark Mode Styles */
-        .dark-mode .header-area {
-            background: #1a1a2e !important;
-            border-bottom-color: #2d2d44 !important;
-        }
-        
-        .dark-mode .menu-list > li > a {
-            color: #e0e0e0 !important;
-        }
-        
-        .dark-mode .menu-list > li > a:hover,
-        .dark-mode .menu-list > li.active > a {
-            color: #ff6b6b !important;
-        }
-        
-        .dark-mode .sub-menu {
-            background: #16213e !important;
-        }
-        
-        .dark-mode .sub-menu li a {
-            color: #e0e0e0 !important;
-        }
-        
-        .dark-mode .sub-menu li a:hover {
-            background: #1a1a2e !important;
-            color: #ff6b6b !important;
-        }
-        
-        .dark-mode .mobile-logo-area {
-            background: #1a1a2e !important;
-        }
-        
-        /* Mobile Menu Styles */
-        .main-menu.active {
-            transform: translateX(0) !important;
-        }
-        
-        @media (max-width: 991px) {
-            .main-menu {
-                position: fixed;
-                top: 0;
-                left: 0;
-                width: 100%;
-                height: 100vh;
-                background: #fff;
-                transform: translateX(-100%);
-                transition: transform 0.3s ease;
-                z-index: 999;
-                overflow-y: auto;
-                padding: 80px 20px 20px;
-            }
-            
-            .dark-mode .main-menu {
-                background: #1a1a2e;
-            }
-            
-            .mobile-logo-area {
-                position: absolute;
-                top: 0;
-                left: 0;
-                right: 0;
-                padding: 20px;
-                background: #fff;
-                border-bottom: 1px solid #eee;
-            }
-            
-            .dark-mode .mobile-logo-area {
-                background: #1a1a2e;
-                border-bottom-color: #2d2d44;
-            }
-            
-            .menu-list {
-                flex-direction: column;
-                align-items: center;
-                gap: 15px;
-            }
-            
-            .menu-list > li {
-                width: 100%;
-                text-align: center;
-            }
-            
-            .sub-menu {
-                position: static !important;
-                box-shadow: none !important;
-                background: #f8f9fa !important;
-                padding: 10px 0 !important;
-                margin-top: 10px !important;
-                border-radius: 8px !important;
-                display: none;
-            }
-            
-            .dark-mode .sub-menu {
-                background: #16213e !important;
-            }
-            
-            .sub-menu li a {
-                padding: 8px 20px !important;
-            }
-        }
-    </style>
-    @endpush
+                    <!-- More Accordion (mobile) -->
+                    <button
+                        @click="mobileMoreOpen = !mobileMoreOpen"
+                        class="flex items-center justify-between px-6 py-3 text-black hover:bg-gray-50 transition"
+                        :aria-expanded="mobileMoreOpen"
+                    >
+                        More
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 transition-transform duration-200" :class="mobileMoreOpen ? 'rotate-180' : ''" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
+                        </svg>
+                    </button>
 
-    @push('scripts')
-    <script>
-        document.addEventListener('livewire:initialized', function() {
-            // Close mobile menu on navigation
-            Livewire.on('navigated', () => {
-                const menuBtn = document.querySelector('.mobile-menu-btn');
-                if (menuBtn) {
-                    menuBtn.click();
-                }
-            });
-            
-            // Handle dark mode toggle
-            Livewire.on('darkModeToggled', (isDark) => {
-                document.documentElement.classList.toggle('dark-mode', isDark);
-                document.body.classList.toggle('dark-mode', isDark);
-            });
-            
-            // Initialize dark mode from session
-            const isDark = @json(session('dark_mode', false));
-            if (isDark) {
-                document.documentElement.classList.add('dark-mode');
-                document.body.classList.add('dark-mode');
-            }
-        });
-    </script>
-    @endpush
+                    <div x-show="mobileMoreOpen" x-transition x-cloak class="bg-gray-50">
+                        @foreach ($moreLinks as $path => $label)
+                            @php
+                                $isActive = request()->is(trim($path, '/') ?: '/');
+                            @endphp
+                            <a href="{{ url($path) }}"
+                               wire:navigate
+                               @click="mobileOpen = false; mobileMoreOpen = false"
+                               @if($isActive) aria-current="page" @endif
+                               @class([
+                                   'block pl-10 pr-6 py-2.5 text-sm text-gray-700 hover:bg-gray-100 transition',
+                                   'text-blue-500 font-medium' => $isActive,
+                               ])
+                            >
+                                {{ $label }}
+                            </a>
+                        @endforeach
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </div>
 </div>

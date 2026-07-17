@@ -84,7 +84,7 @@ new class extends Component
         </header>
 
         {{-- ARTICLE CONTENT BODY --}}
-        <main class="max-w-4xl mx-auto px-6 md:px-12 lg:px-20 py-12">
+        <main class="max-w-4xl mx-auto px-6 md:px-12 lg:px-20 py-16">
             
             {{-- Date & Share Bar --}}
             <div class="flex flex-wrap items-center justify-between gap-4 mb-10 pb-6 border-b border-gray-200">
@@ -106,7 +106,7 @@ new class extends Component
                 {{-- Drop Cap Intro --}}
                 <p class="first-letter:text-7xl first-letter:font-bold first-letter:text-gray-900 first-letter:float-left first-letter:mr-3 first-letter:mt-[-10px] first-letter:font-serif leading-relaxed mb-6">
                     A new wave of professionals is transforming Governance, Risk, and Compliance from a rigid framework into a dynamic force for trust, innovation, and resilience. Governance, Risk, and Compliance (GRC) has long been associated with boardrooms and bureaucracy—a domain reserved for executives and auditors. But that image is changing fast.
-                </p>
+                </p> 
 
                 {{-- Render remaining content --}}
                 {!! $post->content !!}

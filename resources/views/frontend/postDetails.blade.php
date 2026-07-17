@@ -7,4 +7,4 @@
     <livewire:postContent.post-header />
     <livewire:postContent.leave-comment :postId="$article->id" />
     <livewire:recommended-posts />
-@endsection  
+@endsection   

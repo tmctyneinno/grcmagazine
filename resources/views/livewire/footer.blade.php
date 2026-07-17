@@ -51,7 +51,7 @@ new class extends Component
             
             {{-- COLUMN 1: BRAND (Span 5) --}}
             <div class="lg:col-span-5">
-                 <div class="flex items-center bg-white px-8 py-3  mr-[140px] mb-4 ">
+                <div class="flex items-center bg-white px-8 py-3  mr-[140px] mb-4 ">
                     <img src="/assets/img/logo.png" alt="GRC & Financial Crime" class="h-10">
                 </div>
                 <!-- <h3 class="text-3xl md:text-4xl font-bold text-white mb-2">

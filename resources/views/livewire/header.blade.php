@@ -34,15 +34,13 @@
         <div class="max-w-7xl mx-auto px-4 md:px-8 py-6 flex flex-col lg:flex-row items-center justify-between gap-6">
             {{-- Brand Logo & Tagline - Now in ONE LINE --}}
             <div class="text-center lg:text-left">
-                <div class="flex items-center bg-white  px-4 py-2">
-                    <a href="{{ url('/') }}" wire:navigate>
-                        <img src="/assets/img/logo.png" alt="GRC & Financial Crime" class="h-10">
-                    </a>
+                <div class="flex items-center bg-white px-2 py-3  mr-[140px] mb-4 ">
+                    <img src="/assets/img/logo.png" alt="GRC & Financial Crime" class="h-10">
                 </div>
                 <!-- <h2 class="text-2xl md:text-wxl font-serif font-bold text-white">
                     GRC & Financial Crime <span class="text-[#c99b3a]">Today</span>
                 </h2> -->
-                <p class="text-[10px] text-gray-400 uppercase tracking-widest mt-1.5 font-medium">
+                <p class="text-[8px] text-gray-400 uppercase tracking-widest mt-1.5 font-medium">
                     AN IGRCFP PUBLICATION . THE MORGANS CONSORTIUM
                 </p>
             </div>

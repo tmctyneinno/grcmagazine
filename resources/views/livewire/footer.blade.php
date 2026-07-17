@@ -83,9 +83,9 @@ new class extends Component
             <div class="lg:col-span-2">
                 <h4 class="text-sm font-bold uppercase tracking-widest mb-6" style="color: #c9a227;">Organisation</h4>
                 <ul class="space-y-3 text-sm text-gray-400">
-                    <li><a href="https://igrcfp.org/" class="hover:text-white transition-colors">IGRCFP</a></li>
-                    <li><a href="http://morgansconsortium.com" class="hover:text-white transition-colors">The Morgans Consortium</a></li>
-                    <li><a href="https://wgrcfp.org/" class="hover:text-white transition-colors">WGRCFP</a></li>
+                    <!-- <li><a href="https://igrcfp.org/" class="hover:text-white transition-colors">The IGRCFP Publication</a></li> -->
+                    <!-- <li><a href="http://morgansconsortium.com" class="hover:text-white transition-colors">The Morgans Consortium</a></li> -->
+                    <!-- <li><a href="https://wgrcfp.org/" class="hover:text-white transition-colors">WGRCFP</a></li> -->
                     <li><a href="#" class="hover:text-white transition-colors">IFCFPN</a></li>
                     <li><a href="https://oysterchecks.com/" class="hover:text-white transition-colors">OysterChecks Platform</a></li>
                 </ul>

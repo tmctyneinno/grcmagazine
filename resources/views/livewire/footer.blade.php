@@ -85,8 +85,8 @@ new class extends Component
                 <ul class="space-y-3 text-sm text-gray-400">
                     <!-- <li><a href="https://igrcfp.org/" class="hover:text-white transition-colors">The IGRCFP Publication</a></li> -->
                     <!-- <li><a href="http://morgansconsortium.com" class="hover:text-white transition-colors">The Morgans Consortium</a></li> -->
-                    <!-- <li><a href="https://wgrcfp.org/" class="hover:text-white transition-colors">WGRCFP</a></li> -->
-                    <li><a href="#" class="hover:text-white transition-colors">IFCFPN</a></li>
+                    <li><a href="https://wgrcfp.org/" class="hover:text-white transition-colors">WGRCFP</a></li>
+                    <!-- <li><a href="#" class="hover:text-white transition-colors">IFCFPN</a></li> -->
                     <li><a href="https://oysterchecks.com/" class="hover:text-white transition-colors">OysterChecks Platform</a></li>
                 </ul>
             </div>

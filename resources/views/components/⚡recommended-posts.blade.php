@@ -8,166 +8,161 @@ new class extends Component
     public $posts = [
         [
             'image' => '/assets/img/post-4.jpg',
-            'title' => 'Redefining GRC for a new generation',
-            'excerpt' => 'A Place to Call Home For a long time, we simply wanted to build something that felt like a home rather than just another..',
-            'date' => 'Jan 16, 2026',
-            'slug' => 'redefining-grc-for-a-new-generation'
+            'title' => 'OFAC Expands SDN List — 47 Entities Added in Largest Single Designation Action of 2026',
+            'excerpt' => 'The Treasury\'s designations span six jurisdictions and include front companies alleged to have channelled funds to sanctioned state actors through third-country intermediaries.',
+            'date' => 'Washington Desk . 26 June 2026',
+            'slug' => 'ofac-expands-sdn-list'
         ],
         [
             'image' => '/assets/img/post-2.jpg',
-            'title' => 'Redefining GRC for a new generation',
-            'excerpt' => 'A Place to Call Home For a long time, we simply wanted to build something that felt like a home rather than just another..',
-            'date' => 'Jan 16, 2026',
-            'slug' => 'redefining-grc-for-a-new-generation-2'
+            'title' => 'New Standards in Financial Compliance',
+            'excerpt' => 'We are updating our framework to meet global standards, ensuring safety and trust in every transaction across borders.',
+            'date' => 'London Desk . 24 June 2026',
+            'slug' => 'new-standards-financial-compliance'
         ],
         [
             'image' => '/assets/img/post-3.jpg',
-            'title' => 'Redefining GRC for a new generation',
-            'excerpt' => 'A Place to Call Home For a long time, we simply wanted to build something that felt like a home rather than just another..',
-            'date' => 'Jan 16, 2026',
-            'slug' => 'redefining-grc-for-a-new-generation-3'
-        ],
-        [
-            'image' => '/assets/img/post-4.jpg',
-            'title' => 'New Standards in Financial Compliance',
-            'excerpt' => 'We are updating our framework to meet global standards, ensuring safety and trust in every transaction..',
-            'date' => 'Feb 02, 2026',
-            'slug' => 'new-standards-in-financial-compliance'
-        ],
-        [
-            'image' => '/assets/img/post-2.jpg',
             'title' => 'Risk Management in Modern Business',
-            'excerpt' => 'How companies are adapting risk strategies to a fast-changing digital and regulatory landscape..',
-            'date' => 'Feb 10, 2026',
-            'slug' => 'risk-management-in-modern-business'
-        ],
-          [
-            'image' => '/assets/img/post-3.jpg',
-            'title' => 'Redefining GRC for a new generation',
-            'excerpt' => 'A Place to Call Home For a long time, we simply wanted to build something that felt like a home rather than just another..',
-            'date' => 'Jan 16, 2026',
-            'slug' => 'redefining-grc-for-a-new-generation-3'
+            'excerpt' => 'How companies are adapting risk strategies to a fast-changing digital and regulatory landscape in 2026.',
+            'date' => 'Nairobi Desk . 22 June 2026',
+            'slug' => 'risk-management-modern-business'
         ],
         [
             'image' => '/assets/img/post-4.jpg',
-            'title' => 'New Standards in Financial Compliance',
-            'excerpt' => 'We are updating our framework to meet global standards, ensuring safety and trust in every transaction..',
-            'date' => 'Feb 02, 2026',
-            'slug' => 'new-standards-in-financial-compliance'
+            'title' => 'Digital Operational Resilience Act (DORA)',
+            'excerpt' => 'Understanding the new EU requirements for ICT risk management and how they impact financial entities worldwide.',
+            'date' => 'Brussels Desk . 20 June 2026',
+            'slug' => 'dora-eu-requirements'
+        ],
+        [
+            'image' => '/assets/img/post-2.jpg',
+            'title' => 'Crypto Asset Reporting Framework (CARF)',
+            'excerpt' => 'OECD releases new guidance on crypto tax reporting, setting global standards for transparency and compliance.',
+            'date' => 'Paris Desk . 18 June 2026',
+            'slug' => 'carf-crypto-reporting'
+        ],
+        [
+            'image' => '/assets/img/post-3.jpg',
+            'title' => 'Anti-Money Laundering Authority (AMLA)',
+            'excerpt' => 'The new EU agency begins operations, taking over direct supervision of high-risk cross-border financial institutions.',
+            'date' => 'Frankfurt Desk . 15 June 2026',
+            'slug' => 'amla-eu-agency'
         ],
     ];
+
+    
 };
 ?>
 
-<div class="max-w-6xl mx-auto px-4 py-16">
-    {{-- Header --}}
-    <div class="flex items-center justify-between mb-8">
-        <h2 class="text-[clamp(1.5rem,3vw,2rem)] font-bold text-gray-900 relative">
-            Recommended Post
-            <span class="absolute -bottom-1 left-0 w-full h-1 bg-red-600"></span>
-        </h2>
-        <button class="px-6 py-2 rounded-full border border-gray-300 bg-white text-gray-700 text-sm font-medium hover:bg-gray-50 transition">
-            View All
-        </button>
-    </div>
+<div class="w-full bg-[#f8f5ee] py-12 px-4 sm:px-6 lg:px-8" style="font-family: 'EB Garamond', serif;">
+    <div class="max-w-7xl mx-auto space-y-12">
+        
+        {{-- ========================================== --}}
+        {{-- SECTION 1: SIMILAR ARTICLES                --}}
+        {{-- ========================================== --}}
+        <section>
+            {{-- Section Header --}}
+            <div class="flex items-center gap-4 mb-6">
+                <span class="bg-[#c9a227] text-white text-xs font-bold tracking-widest uppercase px-3 py-1.5">
+                    Similar Articles
+                </span>
+                <div class="h-[1px] bg-gray-300 flex-grow"></div>
+            </div>
 
-    {{-- Slider Carousel --}}
-    <div 
-        x-data="{
-            current: 0,
-            perView: 3,
-            total: {{ count($posts) }},
-            get maxIndex() {
-                return Math.ceil(this.total / this.perView) - 1;
-            },
-            next() {
-                this.current = this.current < this.maxIndex ? this.current + 1 : 0;
-            },
-            prev() {
-                this.current = this.current > 0 ? this.current - 1 : this.maxIndex;
-            },
-            init() {
-                // Auto-slide every 5 seconds
-                setInterval(() => this.next(), 5000);
-            }
-        }"
-        class="relative pb-12" {{-- ➕ Added padding bottom to make space --}}
-    >
-        {{-- Slides Container --}}
-        <div class="overflow-hidden">
-            <div 
-                class="flex transition-transform duration-500 ease-in-out"
-                :style="`transform: translateX(-${current * 100}%)`"
-            >
-                @foreach(array_chunk($posts, 3) as $slideGroup)
-                    <div class="w-full flex-shrink-0 grid grid-cols-1 md:grid-cols-3 gap-6 px-2">
-                        @foreach($slideGroup as $post)
-                            <div class="relative rounded-3xl overflow-hidden h-[520px] shadow-lg">
-                                {{-- Background Image --}}
-                                <img 
-                                    src="{{ $post['image'] }}" 
-                                    alt="{{ $post['title'] }}" 
-                                    class="w-full h-full object-cover"
-                                >
-                                {{-- Gradient Overlay --}}
-                                <div class="absolute bottom-0 left-0 w-full h-3/4 bg-gradient-to-t from-black/90 via-black/60 to-transparent"></div>
-
-                                {{-- Content --}}
-                                <div class="absolute bottom-0 left-0 w-full p-6 text-white">
-                                    <h3 class="text-xl font-semibold mb-3 leading-snug">{{ $post['title'] }}</h3>
-                                    <p class="text-sm text-gray-200 mb-4 line-clamp-2">{{ $post['excerpt'] }}</p>
-
-                                    {{-- Date & Button --}}
-                                    <div class="flex items-center justify-between">
-                                        <span class="text-xs text-gray-300 flex items-center gap-1">
-                                            <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-                                            </svg>
-                                            {{ $post['date'] }}
-                                        </span>
-
-                                        <a 
-                                            href="{{ url('/post/'.$post['slug']) }}" 
-                                            class="px-4 py-1.5 bg-red-600 text-white text-xs font-medium rounded-sm hover:bg-red-700 transition"
-                                        >
-                                            Read More..
-                                        </a>
-                                    </div>
+            {{-- Cards Grid --}}
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                @foreach(array_slice($posts, 0, 3) as $post)
+                    <div class="bg-white rounded-xl overflow-hidden shadow-sm border border-gray-100 group hover:shadow-md transition-shadow duration-300">
+                        {{-- Image --}}
+                        <div class="relative h-48 overflow-hidden">
+                            <img 
+                                src="{{ $post['image'] }}" 
+                                alt="{{ $post['title'] }}" 
+                                class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-500"
+                            >
+                        </div>
+                        
+                        {{-- Content --}}
+                        <div class="p-5 flex flex-col justify-between min-h-[220px]">
+                            <div>
+                                <h3 class="text-lg font-serif font-bold text-gray-900 leading-tight mb-3 line-clamp-2 group-hover:text-[#c9a227] transition-colors">
+                                    {{ $post['title'] }}
+                                </h3>
+                                <p class="text-sm text-gray-600 leading-relaxed mb-4 line-clamp-3">
+                                    {{ $post['excerpt'] }}
+                                </p>
+                            </div>
+                            
+                            <div>
+                                <a href="{{ url('/post/'.$post['slug']) }}" class="inline-flex items-center gap-1 text-xs font-bold uppercase tracking-wider text-gray-900 hover:text-[#c9a227] transition-colors mb-3">
+                                    Read Full Brief 
+                                    <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m5-4H3"></path></svg>
+                                </a>
+                                <div class="text-[10px] text-gray-400 italic border-t border-gray-100 pt-3">
+                                    {{ $post['date'] }}
                                 </div>
                             </div>
-                        @endforeach
+                        </div>
                     </div>
                 @endforeach
             </div>
-        </div>
+        </section>
 
-        {{-- Navigation Arrows — ⬇️ MOVED FURTHER DOWN --}}
-        <button 
-            @click="prev()"
-            class="absolute right-16 bottom-0 w-10 h-10 rounded-full bg-gray-200 hover:bg-gray-300 flex items-center justify-center transition z-10"
-        >
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
-            </svg>
-        </button>
-        <button 
-            @click="next()"
-            class="absolute right-4 bottom-0 w-10 h-10 rounded-full bg-gray-200 hover:bg-gray-300 flex items-center justify-center transition z-10"
-        >
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
-            </svg>
-        </button>
+        {{-- ========================================== --}}
+        {{-- SECTION 2: RECOMMENDED ARTICLES            --}}
+        {{-- ========================================== --}}
+        <section>
+            {{-- Section Header --}}
+            <div class="flex items-center justify-between mb-6">
+                <div class="flex items-center gap-4 flex-grow">
+                    <span class="bg-[#c9a227] text-white text-xs font-bold tracking-widest uppercase px-3 py-1.5">
+                        Recommended Articles
+                    </span>
+                    <div class="h-[1px] bg-gray-300 flex-grow"></div>
+                </div>
+                <a href="#" class="text-sm font-medium text-gray-700 hover:text-[#c9a227] transition-colors ml-4 whitespace-nowrap">
+                    See all
+                </a>
+            </div>
 
-        {{-- Pagination Dots — ⬇️ MOVED FURTHER DOWN --}}
-        <div class="absolute bottom-1 left-4 flex gap-2">
-            @for($i = 0; $i < ceil(count($posts)/3); $i++)
-                <button 
-                    @click="current = {{ $i }}"
-                    class="w-3 h-3 rounded-full transition-all"
-                    x-bind:class="current === {{ $i }} ? 'bg-red-600 w-6' : 'bg-gray-300'"
-                ></button>
-            @endfor
-        </div>
+            {{-- Cards Grid --}}
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                @foreach(array_slice($posts, 3, 3) as $post)
+                    <div class="bg-white rounded-xl overflow-hidden shadow-sm border border-gray-100 group hover:shadow-md transition-shadow duration-300">
+                        {{-- Image --}}
+                        <div class="relative h-48 overflow-hidden">
+                            <img 
+                                src="{{ $post['image'] }}" 
+                                alt="{{ $post['title'] }}" 
+                                class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-500"
+                            >
+                        </div>
+                        
+                        {{-- Content --}}
+                        <div class="p-5 flex flex-col justify-between min-h-[220px]">
+                            <div>
+                                <h3 class="text-lg font-serif font-bold text-gray-900 leading-tight mb-3 line-clamp-2 group-hover:text-[#c9a227] transition-colors">
+                                    {{ $post['title'] }}
+                                </h3>
+                                <p class="text-sm text-gray-600 leading-relaxed mb-4 line-clamp-3">
+                                    {{ $post['excerpt'] }}
+                                </p>
+                            </div>
+                            
+                            <div>
+                                <a href="{{ url('/post/'.$post['slug']) }}" class="inline-flex items-center gap-1 text-xs font-bold uppercase tracking-wider text-gray-900 hover:text-[#c9a227] transition-colors mb-3">
+                                    Read Full Brief 
+                                    <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m5-4H3"></path></svg>
+                                </a>
+                                <div class="text-[10px] text-gray-400 italic border-t border-gray-100 pt-3">
+                                    {{ $post['date'] }}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                @endforeach
+            </div>
+        </section>
+
     </div>
 </div>

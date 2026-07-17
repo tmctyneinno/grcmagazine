@@ -7,7 +7,6 @@
     <livewire:banner 
         image="/assets/img/news-banner.jpg" 
         title="Contact"
-    />
-    <livewire:contact-section />
-    <livewire:office-map-section />
+    /> 
+    <livewire:contact.contact-section />
 @endsection

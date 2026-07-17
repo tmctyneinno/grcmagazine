@@ -51,7 +51,7 @@
                     <a href="{{ url('/') }}" wire:navigate>
                         <img src="/assets/img/logo.png" alt="GRC & Financial Crime" class="h-10">
                     </a>
-                </div>
+                </div> 
 
                 <!-- Desktop Menu -->
                 <div class="hidden lg:flex items-center space-x-8">

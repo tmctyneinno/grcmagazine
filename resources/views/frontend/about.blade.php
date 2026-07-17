@@ -8,4 +8,4 @@
         title="About us"
     />   
     <livewire:aboutus-content />   
-@endsection 
+@endsection  

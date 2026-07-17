@@ -34,16 +34,21 @@
         <div class="max-w-7xl mx-auto px-4 md:px-8 py-6 flex flex-col lg:flex-row items-center justify-between gap-6">
             {{-- Brand Logo & Tagline - Now in ONE LINE --}}
             <div class="text-center lg:text-left">
-                <h2 class="text-2xl md:text-wxl font-serif font-bold text-white">
+                <div class="flex items-center bg-white  px-4 py-2">
+                    <a href="{{ url('/') }}" wire:navigate>
+                        <img src="/assets/img/logo.png" alt="GRC & Financial Crime" class="h-10">
+                    </a>
+                </div>
+                <!-- <h2 class="text-2xl md:text-wxl font-serif font-bold text-white">
                     GRC & Financial Crime <span class="text-[#c99b3a]">Today</span>
-                </h2>
+                </h2> -->
                 <p class="text-[10px] text-gray-400 uppercase tracking-widest mt-1.5 font-medium">
                     AN IGRCFP PUBLICATION . THE MORGANS CONSORTIUM
                 </p>
             </div>
 
             {{-- Desktop Navigation --}}
-            <nav class="hidden lg:flex items-center gap-4 md:gap-6 text-sm md:text-base font-medium tracking-wide">
+            <nav class="hidden lg:flex items-center gap-4 md:gap-7 text-sm md:text-base font-medium tracking-wide">
                 @php
                     $navLinks = [
                         '/' => 'Home',
@@ -81,7 +86,7 @@
                 </button>
 
                 {{-- Subscribe Button --}}
-                <a href="{{ url('/subscribe') }}"
+                <a href="#"
                    wire:navigate
                    class="bg-[#c99b3a] hover:bg-[#b3882e] text-black font-bold text-sm px-6 py-2 rounded-lg transition-colors tracking-wide"
                 >

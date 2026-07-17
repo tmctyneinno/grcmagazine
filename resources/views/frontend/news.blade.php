@@ -10,4 +10,4 @@
     />
     <livewire:news-analytics />
     <livewire:recommended-posts />
-@endsection
+@endsection 

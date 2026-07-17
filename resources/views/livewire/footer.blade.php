@@ -51,9 +51,12 @@ new class extends Component
             
             {{-- COLUMN 1: BRAND (Span 5) --}}
             <div class="lg:col-span-5">
-                <h3 class="text-3xl md:text-4xl font-bold text-white mb-2">
+                 <div class="flex items-center bg-white px-8 py-3  mr-[140px] mb-4 ">
+                    <img src="/assets/img/logo.png" alt="GRC & Financial Crime" class="h-10">
+                </div>
+                <!-- <h3 class="text-3xl md:text-4xl font-bold text-white mb-2">
                     GRC & Financial Crime <span style="color: #c9a227;">Today</span>
-                </h3>
+                </h3> -->
                 <p class="text-xs md:text-sm font-bold uppercase tracking-[0.2em] mb-6" style="color: #c9a227;">
                     An IGRCFP Publication · The Morgans Consortium
                 </p>
@@ -80,11 +83,11 @@ new class extends Component
             <div class="lg:col-span-2">
                 <h4 class="text-sm font-bold uppercase tracking-widest mb-6" style="color: #c9a227;">Organisation</h4>
                 <ul class="space-y-3 text-sm text-gray-400">
-                    <li><a href="#" class="hover:text-white transition-colors">IGRCFP</a></li>
-                    <li><a href="#" class="hover:text-white transition-colors">The Morgans Consortium</a></li>
-                    <li><a href="#" class="hover:text-white transition-colors">WGRCFP</a></li>
+                    <li><a href="https://igrcfp.org/" class="hover:text-white transition-colors">IGRCFP</a></li>
+                    <li><a href="http://morgansconsortium.com" class="hover:text-white transition-colors">The Morgans Consortium</a></li>
+                    <li><a href="https://wgrcfp.org/" class="hover:text-white transition-colors">WGRCFP</a></li>
                     <li><a href="#" class="hover:text-white transition-colors">IFCFPN</a></li>
-                    <li><a href="#" class="hover:text-white transition-colors">OysterChecks Platform</a></li>
+                    <li><a href="https://oysterchecks.com/" class="hover:text-white transition-colors">OysterChecks Platform</a></li>
                 </ul>
             </div>
 
@@ -92,12 +95,12 @@ new class extends Component
             <div class="lg:col-span-3">
                 <h4 class="text-sm font-bold uppercase tracking-widest mb-6" style="color: #c9a227;">Awards & Events</h4>
                 <ul class="space-y-3 text-sm text-gray-400">
-                    <li><a href="#" class="hover:text-white transition-colors">2026 Awards — Europe</a></li>
-                    <li><a href="#" class="hover:text-white transition-colors">2026 Awards — Africa</a></li>
-                    <li><a href="#" class="hover:text-white transition-colors">Mid-Year Summit</a></li>
+                    <li><a href="https://www.grcfincrimeawards.com" class="hover:text-white transition-colors">2026 Awards — Europe</a></li>
+                    <li><a href="https://www.eu.grcfincrimeawards.com" class="hover:text-white transition-colors">2026 Awards — Africa</a></li>
+                    <li><a href="https://www.grcfincrimeawards.com/summit" class="hover:text-white transition-colors">Mid-Year Summit</a></li>
                     <li><a href="#" class="hover:text-white transition-colors">Past Winners</a></li>
                     <li><a href="#" class="hover:text-white transition-colors">Enter / Nominate</a></li>
-                    <li><a href="#" class="hover:text-white transition-colors">Judge & Sponsor</a></li>
+                    <li><a href="https://www.grcfincrimeawards.com/sponsors" class="hover:text-white transition-colors">Judge & Sponsor</a></li>
                 </ul>
             </div>
 

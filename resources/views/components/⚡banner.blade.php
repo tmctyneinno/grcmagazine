@@ -12,7 +12,7 @@ new class extends Component
         $this->image = $image;
         $this->title = $title;
     }
-};
+}; 
 ?>
 
 <div>

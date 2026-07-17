@@ -2,7 +2,7 @@
 
 use Livewire\Component;
 use App\Models\Comment;
-
+ 
 new class extends Component
 {
     public $name;
@@ -102,8 +102,8 @@ new class extends Component
             @endif
 
             {{-- Leave a Comment Form --}}
-            <div class="w-full max-w-7xl mx-auto my-[40px]">
-                <div class="bg-gradient-to-r from-red-700 via-red-500 to-red-100 text-white font-semibold text-lg py-3 px-6 rounded-t-md">
+            <div class="w-full max-w-7xl mx-auto pb-[40px] mt-[0px] bg-[#f8f5ee]">
+                <div class="bg-gradient-to-r from-[#AB8B33] via-[#dcb352] to-[#eaddc5] text-white font-semibold text-lg py-3 px-6 rounded-t-md">
                     Leave a comment
                 </div>
 
@@ -158,7 +158,7 @@ new class extends Component
                         <div class="flex justify-end">
                             <button 
                                 type="submit" 
-                                class="bg-red-700 hover:bg-red-800 text-white px-6 py-2 rounded-full transition"
+                                class="bg-[#AB8B33] hover:bg-[#927628] text-white px-6 py-2 rounded-full transition"
                             >
                                 Post Comment
                             </button>

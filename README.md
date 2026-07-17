@@ -76,3 +76,7 @@ Work on the Research & White peper
 Work on uploading 2 article on the GRCfincrimeToday magazine
 
 Work on the UI on the GRCfincrimeToday magazine
+
+staging.grcfincrimetoday.com.tynesideinnovation.com
+
+php artisan make:livewire CategorySection

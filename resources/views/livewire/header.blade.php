@@ -2,7 +2,7 @@
 <div class="w-full">
     {{-- 🔝 INTELLIGENCE BRIEF TICKER BAR --}}
     <div class="w-full bg-[#0b1120] border-b-2 border-[#2a3143] overflow-hidden">
-        <div class="flex items-center py-4 px-6 md:px-10">
+        <div class="flex items-center py-3 px-6 md:px-10">
             {{-- Left Badge --}}
             <div class="flex-shrink-0 bg-red-700 text-white font-bold text-base md:text-lg px-6 py-2 rounded mr-8 md:mr-12 whitespace-nowrap z-10 tracking-wide">
                 INTELLIGENCE BRIEF

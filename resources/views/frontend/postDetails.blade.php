@@ -4,7 +4,7 @@
 
 @section('content')
       
-    <livewire:post-header />
+    <livewire:postContent.post-header />
     {{-- ✅ Pass the article ID here --}}
-    <livewire:leave-comment :postId="$article->id" />
-@endsection
+    <livewire:postContent.leave-comment :postId="$article->id" />
+@endsection 

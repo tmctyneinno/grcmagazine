@@ -13,7 +13,7 @@ new class extends Component
     <div class="bg-gradient-to-r from-black to-[#990000] px-6 md:px-12 lg:px-16 py-12 md:py-16 flex flex-col md:flex-row items-center justify-between gap-8">
         <div class="text-center md:text-left">
             <h2 class="text-[clamp(1.8rem,4vw,2.5rem)] font-bold leading-tight">Subscribe to our<br>newsletter</h2>
-        </div>
+        </div> 
         <div class="w-full md:w-auto">
             <form class="flex flex-col sm:flex-row items-center bg-white rounded-full p-1 shadow-lg">
                 <input 

@@ -11,7 +11,7 @@ new class extends Component
 <footer class="w-full text-white" style="background-color: #0b1220; font-family: 'EB Garamond', serif;">
     
     {{-- NEWSLETTER SECTION --}}
-    <div class="border-b border-[#c9a227]/30 px-6 md:px-16 lg:px-24 py-12 md:py-16">
+    <div class="border-b border-[#c9a227]/30 px-6 md:px-16 lg:px-24 py-12 md:py-6">
         <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-8">
             
             {{-- Left: Text --}}
@@ -32,7 +32,7 @@ new class extends Component
                     >
                     <button 
                         type="submit" 
-                        class="w-full sm:w-auto px-8 py-3.5 rounded-sm font-bold uppercase tracking-wider text-[#0b1220] hover:bg-[#e6c866] transition-colors whitespace-nowrap"
+                        class="w-full  sm:w-auto px-8 py-3.5 rounded-full font-bold uppercase tracking-wider text-[#0b1220] hover:bg-[#e6c866] transition-colors whitespace-nowrap"
                         style="background-color: #c9a227;"
                     >
                         Subscribe

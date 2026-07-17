@@ -4,8 +4,9 @@
 
 @section('content')
     <livewire:hero-slider />   
-    <livewire:latest-posts />
-    <livewire:recommended-posts />
-    <livewire:most-read />
-    <livewire:reports-special-editions />
+    <livewire:latest-posts /> 
+    <livewire:category-section /> 
+    <livewire:regulatory-section /> 
+
+
 @endsection   

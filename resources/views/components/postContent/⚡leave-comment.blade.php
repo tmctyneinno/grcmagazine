@@ -61,7 +61,7 @@ new class extends Component
     public function render()
     {
         return <<<'HTML'
-        <div>
+        <div py-16>
             {{-- Error Message --}}
             @if(session()->has('error'))
                 <div class="bg-red-100 border-l-4 border-red-600 text-red-700 p-3 mb-4 rounded max-w-5xl mx-auto">

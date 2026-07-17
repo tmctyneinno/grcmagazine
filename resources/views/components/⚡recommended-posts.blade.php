@@ -3,7 +3,7 @@
 use Livewire\Component;
 
 new class extends Component
-{
+{ 
     // Sample posts data — replace with DB query in production
     public $posts = [
         [

@@ -7,4 +7,6 @@
     <livewire:postContent.post-header />
     {{-- ✅ Pass the article ID here --}}
     <livewire:postContent.leave-comment :postId="$article->id" />
+    <livewire:postContent.leave-comment :postId="$article->id" />
+    <livewire:recommended-posts />
 @endsection 

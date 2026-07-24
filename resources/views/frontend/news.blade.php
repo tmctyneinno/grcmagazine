@@ -9,5 +9,5 @@
         title="News & Analytics"
     />
     <livewire:news-analytics />
-    <livewire:recommended-posts />
+    <livewire:general.recommended-posts />
 @endsection 

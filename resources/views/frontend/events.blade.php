@@ -8,5 +8,5 @@
         title="Events"
     />   
     <livewire:events />
-    <livewire:recommended-posts />  
-@endsection 
+    <livewire:general.recommended-posts />  
+@endsection  

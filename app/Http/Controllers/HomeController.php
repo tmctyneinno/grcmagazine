@@ -32,9 +32,13 @@ class HomeController extends Controller
         return view('frontend.fincrime-aml');
     }
 
-    public function riskESG()
+    public function technologyAIRegTech()
     {
-        return view('frontend.risk-esg');
+        return view('frontend.technologyAIRegTech');
+    }
+
+    public function governanceRiskEsg(){
+        return view('frontend.governanceRiskEsg');
     }
 
     public function events()

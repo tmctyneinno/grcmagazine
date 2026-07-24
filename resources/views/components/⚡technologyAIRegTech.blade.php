@@ -12,22 +12,22 @@ new class extends Component
 
     public function mount()
     {
-        // Fetch articles from FinCrime & AML categories
+        // Fetch articles from Technology, AI & RegTech categories
         $this->posts = Article::where('is_published', true)
             ->whereHas('categories', function ($query) {
-                $query->whereIn('name', ['Fincrime','Fincrime & AML', 'AML', 'Financial Crime', '']);
+                $query->whereIn('name', ['Technology', 'technology_ai', 'AI', 'RegTech', 'Technology, AI & Reg Tech']);
             })
             ->with(['categories'])
             ->orderBy('published_at', 'desc')
             ->get()
             ->map(function ($article) {
                 return [
-                    'image'   => $article->image ? asset('storage/' . $article->image) : 'https://images.unsplash.com/photo-1550751827-4bd374c3f58b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1600&q=80',
+                    'image'   => $article->image ? asset('storage/' . $article->image) : 'https://images.unsplash.com/photo-1518770660439-4636190af475?ixlib=rb-4.0.3&auto=format&fit=crop&w=1600&q=80',
                     'title'   => $article->title,
                     'excerpt' => Str::limit($article->excerpt ?? $article->content, 120),
                     'date'    => $article->published_at?->format('d M Y') ?? 'Recently',
                     'slug'    => $article->slug,
-                    'category'=> $article->categories->first()?->name ?? 'FinCrime',
+                    'category'=> $article->categories->first()?->name ?? 'Technology',
                 ];
             })
             ->toArray();
@@ -63,7 +63,7 @@ new class extends Component
         return array_slice($this->posts, $offset, $this->perPage);
     }
 };
-?> 
+?>
 
 <div class="w-full bg-[#f8f5ee] py-16 px-4 sm:px-6 lg:px-8" style="font-family: 'EB Garamond', serif;">
     <div class="max-w-7xl mx-auto">
@@ -72,7 +72,7 @@ new class extends Component
         <div class="flex items-center justify-between mb-8">
             <div class="flex items-center gap-4 flex-grow">
                 <span class="bg-[#c9a227] text-white text-xs font-bold tracking-widest uppercase px-4 py-2">
-                    FinCrime & AML
+                   Technology, AI & RegTech
                 </span>
                 <div class="h-[1px] bg-gray-300 flex-grow"></div>
             </div>
@@ -96,7 +96,7 @@ new class extends Component
                         
                         {{-- Floating Category Badge --}}
                         <div class="absolute top-4 left-4">
-                             <span class="bg-[#c9a227]/90 backdrop-blur-sm text-white text-[10px] font-bold uppercase px-2 py-1 rounded-sm">
+                             <span class="bg-indigo-600/90 backdrop-blur-sm text-white text-[10px] font-bold uppercase px-2 py-1 rounded-sm">
                                 {{ $post['category'] }}
                              </span>
                         </div>

@@ -1,56 +1,41 @@
 <?php
 
 use Livewire\Component;
+use App\Models\Article;
+use Illuminate\Support\Str;
 
 new class extends Component
-{ 
-    public $posts = [
-        [
-            'image' => '/assets/img/post-1.jpg',
-            'title' => 'OFAC Expands SDN List — 47 Entities Added in Largest Single Designation Action of 2026',
-            'excerpt' => 'The Treasury\'s designations span six jurisdictions and include front companies alleged to have channelled funds to sanctioned state actors through third-country intermediaries.',
-            'date' => 'Washington Desk . 26 June 2026',
-            'slug' => 'ofac-expands-sdn-list-1'
-        ],
-        [
-            'image' => '/assets/img/post-2.jpg',
-            'title' => 'New Standards in Financial Compliance',
-            'excerpt' => 'We are updating our framework to meet global standards, ensuring safety and trust in every transaction across borders.',
-            'date' => 'London Desk . 24 June 2026',
-            'slug' => 'new-standards-financial-compliance'
-        ],
-        [
-            'image' => '/assets/img/post-3.jpg',
-            'title' => 'Risk Management in Modern Business',
-            'excerpt' => 'How companies are adapting risk strategies to a fast-changing digital and regulatory landscape in 2026.',
-            'date' => 'Nairobi Desk . 22 June 2026',
-            'slug' => 'risk-management-modern-business'
-        ],
-        [
-            'image' => '/assets/img/post-4.jpg',
-            'title' => 'Digital Operational Resilience Act (DORA)',
-            'excerpt' => 'Understanding the new EU requirements for ICT risk management and how they impact financial entities worldwide.',
-            'date' => 'Brussels Desk . 20 June 2026',
-            'slug' => 'dora-eu-requirements'
-        ],
-        [
-            'image' => '/assets/img/post-1.jpg',
-            'title' => 'Crypto Asset Reporting Framework (CARF)',
-            'excerpt' => 'OECD releases new guidance on crypto tax reporting, setting global standards for transparency and compliance.',
-            'date' => 'Paris Desk . 18 June 2026',
-            'slug' => 'carf-crypto-reporting'
-        ],
-        [
-            'image' => '/assets/img/post-2.jpg',
-            'title' => 'Anti-Money Laundering Authority (AMLA)',
-            'excerpt' => 'The new EU agency begins operations, taking over direct supervision of high-risk cross-border financial institutions.',
-            'date' => 'Frankfurt Desk . 15 June 2026',
-            'slug' => 'amla-eu-agency'
-        ],
-    ];
+{
+    public $posts = [];
 
     public $currentPage = 1;
     public $perPage = 6;
+
+    public function mount()
+    {
+        $this->posts = Article::where('is_published', true)
+            ->whereHas('categories', function ($query) {
+                $query->whereIn('name', ['News', 'News & Analytics', 'Analytics']);
+            })
+            ->with('categories')
+            ->orderBy('published_at', 'desc')
+            ->get()
+            ->map(function ($article) {
+                return [
+                    'image'   => $article->image
+                        ? asset('storage/' . $article->image)
+                        : '/assets/img/post-1.jpg',
+                    'title'   => $article->title,
+                    'excerpt' => $article->excerpt
+                        ?? Str::limit(strip_tags($article->content), 150),
+                    'date'    => ($article->categories->first()?->name ?? 'News')
+                        . ' Desk . '
+                        . ($article->published_at?->format('d M Y') ?? 'Recently'),
+                    'slug'    => $article->slug,
+                ];
+            })
+            ->toArray();
+    }
 
     public function setPage($page)
     {
@@ -86,7 +71,7 @@ new class extends Component
 
 <div class="w-full bg-[#f8f5ee] pt-16 pb-10 px-4 sm:px-6 lg:px-8" style="font-family: 'EB Garamond', serif;">
     <div class="max-w-7xl mx-auto">
-        
+
         {{-- HEADER SECTION --}}
         <div class="flex items-center justify-between mb-8">
             <div class="flex items-center gap-4 flex-grow">
@@ -95,27 +80,24 @@ new class extends Component
                 </span>
                 <div class="h-[1px] bg-gray-300 flex-grow"></div>
             </div>
-            <a href="#" class="text-lg font-serif text-gray-800 hover:text-[#c9a227] transition-colors ml-6 whitespace-nowrap">
-                See all
-            </a>
         </div>
 
         {{-- CARDS GRID --}}
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
-            @foreach ($this->paginatedPosts as $post)
+            @forelse ($this->paginatedPosts as $post)
                 <div class="bg-white rounded-xl overflow-hidden shadow-sm border border-gray-100 group hover:shadow-md transition-shadow duration-300">
-                    
+
                     {{-- Image Container --}}
                     <div class="relative h-56 overflow-hidden">
-                        <img 
-                            src="{{ $post['image'] }}" 
-                            alt="{{ $post['title'] }}" 
+                        <img
+                            src="{{ $post['image'] }}"
+                            alt="{{ $post['title'] }}"
                             class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-500"
                         >
-                        
+
                         {{-- Gradient Overlay for Text Readability --}}
                         <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent"></div>
-                        
+
                         {{-- Floating Title (Over Image) --}}
                         <div class="absolute bottom-0 left-0 w-full p-5">
                             <h3 class="text-xl font-serif font-bold text-white leading-tight mb-2 drop-shadow-md line-clamp-2">
@@ -131,18 +113,22 @@ new class extends Component
                         </p>
 
                         <div class="flex flex-col gap-3">
-                            <a href="{{ url('/post/'.$post['slug']) }}" class="inline-flex items-center gap-1 text-xs font-bold uppercase tracking-wider text-gray-900 hover:text-[#c9a227] transition-colors">
-                                Read Full Brief 
+                            <a href="{{ url('/post/'.$post['slug']) }}" wire:navigate class="inline-flex items-center gap-1 text-xs font-bold uppercase tracking-wider text-gray-900 hover:text-[#c9a227] transition-colors">
+                                Read Full Brief
                                 <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m5-4H3"></path></svg>
                             </a>
-                            
+
                             <div class="text-[10px] text-[#c9a227] italic border-t border-gray-100 pt-3">
                                 {{ $post['date'] }}
                             </div>
                         </div>
                     </div>
                 </div>
-            @endforeach
+            @empty
+                <div class="col-span-full text-center text-gray-500 py-10">
+                    No news articles available yet.
+                </div>
+            @endforelse
         </div>
 
         {{-- PAGINATION --}}

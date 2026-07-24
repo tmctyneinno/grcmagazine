@@ -54,7 +54,7 @@
                         '/news' => 'News',
                         '/fincrime-aml' => 'FinCrime & AML',
                         '/governance-risk-esg' => 'Governance, Risk & ESG',
-                        '/risk-esg' => 'Risk & ESG',
+                        '/technology-ai-regTech' => 'Technology, AI & RegTech',
                         '/events' => 'Events',
                         '/contact' => 'Connect',
                     ];

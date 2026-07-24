@@ -6,8 +6,8 @@
       
     <livewire:banner 
         image="/assets/img/news-banner.jpg" 
-        title="Goverance, Risk & ESG"
+        title="Technology, AI & RegTech"
     />
-    <livewire:risk-esg />
-    <livewire:recommended-posts />
+    <livewire:technologyAIRegTech />
+    <livewire:general.recommended-posts />
 @endsection

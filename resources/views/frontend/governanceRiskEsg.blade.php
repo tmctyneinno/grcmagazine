@@ -5,8 +5,8 @@
 @section('content')
     <livewire:banner 
         image="/assets/img/about-banner.jpg" 
-        title="Fincrime & AML"
+        title="Governance, Risk & ESG"
     />   
-    <livewire:fincrime-aml />
+    <livewire:governance-risk-esg />
     <livewire:general.recommended-posts />  
 @endsection  

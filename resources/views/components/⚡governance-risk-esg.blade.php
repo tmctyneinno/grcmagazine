@@ -1,56 +1,37 @@
 <?php
 
 use Livewire\Component;
+use App\Models\Article;
+use Illuminate\Support\Str;
 
 new class extends Component
 { 
-    public $posts = [
-        [
-            'image' => '/assets/img/post-1.jpg',
-            'title' => 'OFAC Expands SDN List — 47 Entities Added in Largest Single Designation Action of 2026',
-            'excerpt' => 'The Treasury\'s designations span six jurisdictions and include front companies alleged to have channelled funds to sanctioned state actors through third-country intermediaries.',
-            'date' => 'Washington Desk . 26 June 2026',
-            'slug' => 'ofac-expands-sdn-list-1'
-        ],
-        [
-            'image' => '/assets/img/post-2.jpg',
-            'title' => 'New Standards in Financial Compliance',
-            'excerpt' => 'We are updating our framework to meet global standards, ensuring safety and trust in every transaction across borders.',
-            'date' => 'London Desk . 24 June 2026',
-            'slug' => 'new-standards-financial-compliance'
-        ],
-        [
-            'image' => '/assets/img/post-3.jpg',
-            'title' => 'Risk Management in Modern Business',
-            'excerpt' => 'How companies are adapting risk strategies to a fast-changing digital and regulatory landscape in 2026.',
-            'date' => 'Nairobi Desk . 22 June 2026',
-            'slug' => 'risk-management-modern-business'
-        ],
-        [
-            'image' => '/assets/img/post-4.jpg',
-            'title' => 'Digital Operational Resilience Act (DORA)',
-            'excerpt' => 'Understanding the new EU requirements for ICT risk management and how they impact financial entities worldwide.',
-            'date' => 'Brussels Desk . 20 June 2026',
-            'slug' => 'dora-eu-requirements'
-        ],
-        [
-            'image' => '/assets/img/post-1.jpg',
-            'title' => 'Crypto Asset Reporting Framework (CARF)',
-            'excerpt' => 'OECD releases new guidance on crypto tax reporting, setting global standards for transparency and compliance.',
-            'date' => 'Paris Desk . 18 June 2026',
-            'slug' => 'carf-crypto-reporting'
-        ],
-        [
-            'image' => '/assets/img/post-2.jpg',
-            'title' => 'Anti-Money Laundering Authority (AMLA)',
-            'excerpt' => 'The new EU agency begins operations, taking over direct supervision of high-risk cross-border financial institutions.',
-            'date' => 'Frankfurt Desk . 15 June 2026',
-            'slug' => 'amla-eu-agency'
-        ],
-    ];
-
+    public $posts = [];
     public $currentPage = 1;
     public $perPage = 6;
+
+    public function mount()
+    {
+        // Fetch articles from Governance, Risk & ESG categories
+        $this->posts = Article::where('is_published', true)
+            ->whereHas('categories', function ($query) {
+                $query->whereIn('name', ['Governance', 'Risk', 'ESG', 'Governance, Risk & ESG']);
+            })
+            ->with(['categories'])
+            ->orderBy('published_at', 'desc')
+            ->get()
+            ->map(function ($article) {
+                return [
+                    'image'   => $article->image ? asset('storage/' . $article->image) : 'https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?ixlib=rb-4.0.3&auto=format&fit=crop&w=1600&q=80',
+                    'title'   => $article->title,
+                    'excerpt' => Str::limit($article->excerpt ?? $article->content, 120),
+                    'date'    => $article->published_at?->format('d M Y') ?? 'Recently',
+                    'slug'    => $article->slug,
+                    'category'=> $article->categories->first()?->name ?? 'Governance',
+                ];
+            })
+            ->toArray();
+    }
 
     public function setPage($page)
     {
@@ -95,14 +76,11 @@ new class extends Component
                 </span>
                 <div class="h-[1px] bg-gray-300 flex-grow"></div>
             </div>
-            <a href="#" class="text-lg font-serif text-gray-800 hover:text-[#c9a227] transition-colors ml-6 whitespace-nowrap">
-                See all
-            </a>
         </div>
 
         {{-- CARDS GRID --}}
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
-            @foreach ($this->paginatedPosts as $post)
+            @forelse ($this->paginatedPosts as $post)
                 <div class="bg-white rounded-xl overflow-hidden shadow-sm border border-gray-100 group hover:shadow-md transition-shadow duration-300">
                     
                     {{-- Image Container with Overlay Title --}}
@@ -116,6 +94,13 @@ new class extends Component
                         {{-- Gradient Overlay for Text Readability --}}
                         <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent"></div>
                         
+                        {{-- Floating Category Badge --}}
+                        <div class="absolute top-4 left-4">
+                             <span class="bg-teal-600/90 backdrop-blur-sm text-white text-[10px] font-bold uppercase px-2 py-1 rounded-sm">
+                                {{ $post['category'] }}
+                             </span>
+                        </div>
+
                         {{-- Floating Title (Over Image) --}}
                         <div class="absolute bottom-0 left-0 w-full p-5">
                             <h3 class="text-xl font-serif font-bold text-white leading-tight mb-2 drop-shadow-md line-clamp-2">
@@ -131,7 +116,7 @@ new class extends Component
                         </p>
 
                         <div class="flex flex-col gap-3">
-                            <a href="{{ url('/post/'.$post['slug']) }}" class="inline-flex items-center gap-1 text-xs font-bold uppercase tracking-wider text-gray-900 hover:text-[#c9a227] transition-colors">
+                            <a href="{{ url('/articles/'.$post['slug']) }}" wire:navigate class="inline-flex items-center gap-1 text-xs font-bold uppercase tracking-wider text-gray-900 hover:text-[#c9a227] transition-colors">
                                 Read Full Brief 
                                 <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m5-4H3"></path></svg>
                             </a>
@@ -142,7 +127,11 @@ new class extends Component
                         </div>
                     </div>
                 </div>
-            @endforeach
+            @empty
+                <div class="col-span-3 text-center py-10 text-gray-500">
+                    No articles found in this category.
+                </div>
+            @endforelse
         </div>
 
         {{-- PAGINATION --}}

@@ -4,13 +4,13 @@
     <div class="w-full bg-[#0b1120] border-b-2 border-[#2a3143] overflow-hidden">
         <div class="flex items-center py-3 px-6 md:px-10">
             {{-- Left Badge --}}
-            <div class="flex-shrink-0 bg-red-700 text-white font-bold text-base md:text-lg px-6 py-2 rounded mr-8 md:mr-12 whitespace-nowrap z-10 tracking-wide">
+            <div class="flex-shrink-0 bg-red-700 text-white  font-bold text-xs md:text-sm px-4 py-2 rounded mr-8 md:mr-12 whitespace-nowrap z-10 tracking-wide">
                 INTELLIGENCE BRIEF
             </div>
 
             {{-- Auto-Scrolling Ticker --}}
             <div class="flex-1 overflow-hidden">
-                <div class="flex items-center gap-20 text-amber-200 text-base md:text-lg font-semibold whitespace-nowrap animate-marquee">
+                <div class="flex items-center gap-20 text-amber-200 text-xs md:text-sm  font-semibold whitespace-nowrap animate-marquee">
                     <span>firm for AML Failings</span>
                     <span>FATF grey-lists three new jurisdictions ahead of plenary session</span>
                     <span>New EU AMLD6 implementation deadline configuration</span>
@@ -23,39 +23,40 @@
             </div>
 
             {{-- Right Issue Info --}}
-            <div class="flex-shrink-0 ml-8 pl-8 border-l-2 border-amber-300/30 text-amber-200 text-base md:text-lg font-semibold whitespace-nowrap tracking-wide">
+            <div class="flex-shrink-0 ml-8 pl-8 border-l-2 border-amber-300/30 text-amber-200 text-xs md:text-sm font-semibold whitespace-nowrap tracking-wide">
                 vol VII . ISSUE 24 . 24 JUN 2026
             </div>
         </div>
     </div>
 
-    {{-- 🧭 NEW MAIN NAVBAR (Matches your image exactly) --}}
+    {{-- 🧭 NEW MAIN NAVBAR (Optimized for single line) --}}
     <header class="w-full bg-[#0f1424] border-b-4 border-[#c99b3a]">
-        <div class="max-w-7xl mx-auto px-4 md:px-8 py-6 flex flex-col lg:flex-row items-center justify-between gap-6">
-            {{-- Brand Logo & Tagline - Now in ONE LINE --}}
-            <div class="text-center lg:text-left">
-                <div class="flex items-center bg-white px-2 py-3  mr-[140px] mb-4 ">
-                    <img src="/assets/img/logo.png" alt="GRC & Financial Crime" class="h-10">
+        <div class="max-w-7xl mx-auto px-4 md:px-6 lg:px-8 py-3 flex items-center justify-between gap-4">
+            
+            {{-- Brand Logo & Tagline - Compact --}}
+            <div class="flex-shrink-0 flex flex-col items-start gap-1">
+                <div class="bg-white px-2 py-2 rounded">
+                    <img src="/assets/img/logo.png" alt="GRC & Financial Crime" class="h-8 md:h-10">
                 </div>
-                <!-- <h2 class="text-2xl md:text-wxl font-serif font-bold text-white">
-                    GRC & Financial Crime <span class="text-[#c99b3a]">Today</span>
-                </h2> -->
-                <p class="text-[8px] text-gray-400 uppercase tracking-widest mt-1.5 font-medium">
-                    AN IGRCFP PUBLICATION . THE MORGANS CONSORTIUM
-                </p>
+                <div class="hidden lg:block">
+                    <p class="text-[9px] text-gray-400 uppercase tracking-wider font-medium leading-tight">
+                        AN IGRCFP PUBLICATION<br>THE MORGANS CONSORTIUM
+                    </p>
+                </div>
             </div>
 
-            {{-- Desktop Navigation --}}
-            <nav class="hidden lg:flex items-center gap-4 md:gap-7 text-sm md:text-base font-medium tracking-wide">
+            {{-- Desktop Navigation - Optimized Spacing --}}
+            <nav class="hidden lg:flex items-center gap-3 xl:gap-4 text-sm xl:text-sm font-medium tracking-wide flex-1 justify-center">
                 @php
                     $navLinks = [
                         '/' => 'Home',
                         '/about' => 'About',
                         '/news' => 'News',
                         '/fincrime-aml' => 'FinCrime & AML',
+                        '/governance-risk-esg' => 'Governance, Risk & ESG',
                         '/risk-esg' => 'Risk & ESG',
-                        '/events' => 'Event',
-                        '/contact' => 'Contact',
+                        '/events' => 'Events',
+                        '/contact' => 'Connect',
                     ];
                 @endphp
 
@@ -67,7 +68,7 @@
                        wire:navigate
                        @if($isActive) aria-current="page" @endif
                        @class([
-                           'transition-all duration-200 relative pb-0.5',
+                           'transition-all duration-200 relative pb-0.5 whitespace-nowrap',
                            'text-[#c99b3a] after:absolute after:bottom-0 after:left-0 after:w-full after:h-0.5 after:bg-[#c99b3a]' => $isActive,
                            'text-gray-300 hover:text-white' => !$isActive,
                        ])
@@ -75,7 +76,10 @@
                         {{ $label }}
                     </a>
                 @endforeach
+            </nav>
 
+            {{-- Right Section: Search + Subscribe --}}
+            <div class="flex-shrink-0 flex items-center gap-3">
                 {{-- Search Icon --}}
                 <button class="text-gray-300 hover:text-white transition-colors p-1.5" aria-label="Search">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-5 h-5">
@@ -86,25 +90,22 @@
                 {{-- Subscribe Button --}}
                 <a href="#"
                    wire:navigate
-                   class="bg-[#c99b3a] hover:bg-[#b3882e] text-black font-bold text-sm px-6 py-2 rounded-lg transition-colors tracking-wide"
+                   class="bg-[#c99b3a] hover:bg-[#b3882e] text-black font-bold text-xs xl:text-sm px-4 xl:px-5 py-1.5 xl:py-2 rounded-lg transition-colors tracking-wide whitespace-nowrap"
                 >
                     SUBSCRIBE
                 </a>
-            </nav>
 
-            {{-- Mobile Menu Button --}}
-            <div class="lg:hidden flex items-center justify-between w-full">
-                <div></div>
+                {{-- Mobile Menu Button --}}
                 <button
                     @click="mobileOpen = !mobileOpen"
-                    class="text-white text-3xl"
+                    class="lg:hidden text-white text-2xl ml-2"
                     :aria-expanded="mobileOpen"
                     aria-label="Toggle navigation menu"
                 >
-                    <svg x-show="!mobileOpen" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-8 h-8">
+                    <svg x-show="!mobileOpen" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-7 h-7">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
                     </svg>
-                    <svg x-show="mobileOpen" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-8 h-8">
+                    <svg x-show="mobileOpen" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-7 h-7">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
                     </svg>
                 </button>

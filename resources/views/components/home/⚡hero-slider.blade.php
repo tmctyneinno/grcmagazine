@@ -185,7 +185,7 @@ new class extends Component
             {{-- Left: Locations --}}
             <div class="order-2 md:order-1 text-center md:text-left">
                 <span 
-                    class="text-sm md:text-base tracking-[0.15em] uppercase"
+                    class="text-sm md:text-base text-xs md:text-sm  tracking-[0.15em] uppercase"
                     style="color: #c9a227; font-family: 'Inter', sans-serif; font-weight: 500;"
                 >
                     London <span class="mx-2 opacity-60">.</span> Lagos <span class="mx-2 opacity-60">.</span> Nairobi

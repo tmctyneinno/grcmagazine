@@ -3,10 +3,8 @@
 @section('title', 'GRCFincrimeToday - Home')
 
 @section('content')
-    <livewire:hero-slider />   
-    <livewire:latest-posts /> 
-    <livewire:category-section /> 
-    <livewire:regulatory-section /> 
-
-
+    <livewire:home.hero-slider />   
+    <livewire:home.latest-posts /> 
+    <livewire:home.category-section /> 
+    <livewire:home.regulatory-section /> 
 @endsection   

@@ -16,7 +16,7 @@ class ArticleForm
 {
     public static function configure(Schema $schema): Schema
     {
-        return $schema
+        return $schema 
             ->components([
                 TextInput::make('title')
                     ->required(),
@@ -48,7 +48,7 @@ class ArticleForm
                     ->required(fn (Component $livewire): bool => 
                         $livewire instanceof \Filament\Resources\Pages\CreateRecord
                     )
-                    ->maxSize(10240) // 10MB
+                    ->maxSize(10240)
                     ->acceptedFileTypes(['image/jpeg', 'image/png', 'image/jpg', 'image/webp'])
                     ->imageResizeMode('cover')
                     ->imageCropAspectRatio(null)
@@ -65,11 +65,6 @@ class ArticleForm
                     
                 DatePicker::make('published_at')
                     ->required(),
-                    
-                TextInput::make('comments_count')
-                    ->required()
-                    ->numeric()
-                    ->default(0),
                     
                 Toggle::make('is_published')
                     ->required(),

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Article;
+use App\Models\Event; 
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -48,11 +49,32 @@ class HomeController extends Controller
 
     public function showDetails($slug)
     {
-        // ✅ Make sure we find the article
         $article = Article::where('slug', $slug)
             ->whereNotNull('published_at')
             ->firstOrFail();
 
+        // If you need to process the image URL for the view:
+        if ($article->image) {
+            $article->image_url = asset('storage/' . $article->image);
+        } else {
+            $article->image_url = 'https://images.unsplash.com/photo-1550751827-4bd374c3f58b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1600&q=80';
+        }
+
         return view('frontend.postDetails', compact('article'));
+    }
+
+    // ✅ New Method for Event Details
+    public function showEventDetails($slug)
+    {
+        $event = Event::where('slug', $slug)->firstOrFail();
+
+        // Process image URL for the view
+        if ($event->image) {
+            $event->image_url = asset('storage/' . $event->image);
+        } else {
+            $event->image_url = 'https://images.unsplash.com/photo-1540575467063-178a50c2df87?ixlib=rb-4.0.3&auto=format&fit=crop&w=1600&q=80';
+        }
+
+        return view('frontend.eventDetails', compact('event'));
     }
 }

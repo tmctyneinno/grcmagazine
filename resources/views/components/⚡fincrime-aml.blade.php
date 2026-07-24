@@ -76,7 +76,7 @@ new class extends Component
                 </span>
                 <div class="h-[1px] bg-gray-300 flex-grow"></div>
             </div>
-        </div>
+        </div> 
 
         {{-- CARDS GRID --}}
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
@@ -116,7 +116,7 @@ new class extends Component
                         </p>
 
                         <div class="flex flex-col gap-3">
-                            <a href="{{ url('/articles/'.$post['slug']) }}" wire:navigate class="inline-flex items-center gap-1 text-xs font-bold uppercase tracking-wider text-gray-900 hover:text-[#c9a227] transition-colors">
+                            <a href="{{ route('articles.show', $post['slug']) }}" wire:navigate class="inline-flex items-center gap-1 text-xs font-bold uppercase tracking-wider text-gray-900 hover:text-[#c9a227] transition-colors">
                                 Read Full Brief 
                                 <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m5-4H3"></path></svg>
                             </a>

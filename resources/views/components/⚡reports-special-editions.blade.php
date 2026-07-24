@@ -77,7 +77,7 @@ new class extends Component
                     </span>
 
                     <a 
-                        href="{{ url('/post/'.$post['slug']) }}" 
+                        href="{{ route('articles.show', $post['slug']) }}" 
                         class="px-4 py-1.5 bg-red-600 text-white text-xs font-medium rounded-sm hover:bg-red-700 transition"
                     >
                         Read More..

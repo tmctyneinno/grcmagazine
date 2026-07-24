@@ -15,3 +15,6 @@ Route::get('/contact', [HomeController::class, 'contact'])->name('contact');
 
 // ✅ Article route
 Route::get('/article/{slug}', [HomeController::class, 'showDetails'])->name('articles.show');
+
+// ✅ Event Details Route
+Route::get('/event/{slug}', [HomeController::class, 'showEventDetails'])->name('events.show');

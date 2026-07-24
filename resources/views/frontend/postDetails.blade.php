@@ -6,5 +6,5 @@
       
     <livewire:postContent.post-header />
     <livewire:postContent.leave-comment :postId="$article->id" />
-    <livewire:recommended-posts />
+    <livewire:general.recommended-posts />
 @endsection   

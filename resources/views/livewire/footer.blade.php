@@ -57,9 +57,7 @@ new class extends Component
                 <!-- <h3 class="text-3xl md:text-4xl font-bold text-white mb-2">
                     GRC & Financial Crime <span style="color: #c9a227;">Today</span>
                 </h3> -->
-                <p class="text-xs md:text-sm font-bold uppercase tracking-[0.2em] mb-6" style="color: #c9a227;">
-                    An IGRCFP Publication · The Morgans Consortium
-                </p>
+               
                 <p class="text-gray-400 text-sm leading-relaxed max-w-md">
                     The intelligence publication for governance, risk, compliance and financial crime prevention professionals across the UK, Africa and the world. Published from 85 Great Portland Street, London.
                 </p>

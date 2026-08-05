@@ -38,11 +38,7 @@
                 <div class="bg-white px-2 py-2 rounded">
                     <img src="/assets/img/logo.png" alt="GRC & Financial Crime" class="h-8 md:h-10">
                 </div>
-                <div class="hidden lg:block">
-                    <p class="text-[9px] text-gray-400 uppercase tracking-wider font-medium leading-tight">
-                        AN IGRCFP PUBLICATION<br>THE MORGANS CONSORTIUM
-                    </p>
-                </div>
+                
             </div>
 
             {{-- Desktop Navigation - Optimized Spacing --}}
